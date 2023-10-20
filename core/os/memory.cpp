@@ -72,7 +72,13 @@ void *Memory::alloc_static(size_t p_bytes, bool p_pad_align) {
 	bool prepad = p_pad_align;
 #endif
 
+//Nask 2023/10/20
+#ifdef NK_ALLOC_ENABLE
+	void *mem = nkalloc.Allocate<void*>(p_bytes + (prepad ? PAD_ALIGN : 0));
+#else
 	void *mem = malloc(p_bytes + (prepad ? PAD_ALIGN : 0));
+#endif // NK_ALLOC_ENABLE
+	
 
 	ERR_FAIL_COND_V(!mem, nullptr);
 
@@ -121,7 +127,12 @@ void *Memory::realloc_static(void *p_memory, size_t p_bytes, bool p_pad_align) {
 #endif
 
 		if (p_bytes == 0) {
+//Nask 2023/10/20
+#ifdef NK_ALLOC_ENABLE
+			nkalloc.Release(mem);
+#else
 			free(mem);
+#endif
 			return nullptr;
 		} else {
 			*s = p_bytes;

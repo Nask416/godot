@@ -36,6 +36,13 @@
 #include "editor/editor_folding.h"
 #include "editor/editor_plugin.h"
 
+#ifdef CUSTOM_FEATURE
+///MyCode NasK 2023/10/17
+#include "../CustomFeature/PluginGDScript.h"
+/////////////////////////
+#endif
+
+
 typedef void (*EditorNodeInitCallback)();
 typedef void (*EditorPluginInitializeCallback)();
 typedef bool (*EditorBuildCallback)();
@@ -188,6 +195,14 @@ private:
 		TOOLS_ORPHAN_RESOURCES,
 		TOOLS_BUILD_PROFILE_MANAGER,
 		TOOLS_CUSTOM,
+
+#ifdef CUSTOM_FEATURE
+		/// <summary>
+		/// MyCode NasK 2023/10/17
+		/// 自作プラグイン用の定数
+		/// </summary>
+		TOOLS_NASK_CUSTOM,
+#endif
 		RESOURCE_SAVE,
 		RESOURCE_SAVE_AS,
 
@@ -498,6 +513,16 @@ private:
 	PrintHandlerList print_handler;
 
 	HashMap<String, Ref<Texture2D>> icon_type_cache;
+
+	#ifdef CUSTOM_FEATURE
+	/// <summary>
+	/// MyCode NasK 2023/10/17
+	/// プラグイン管理マネージャーのポインター
+	/// </summary>
+	NasK::PluginGDScriptManager *plugin_dgs_manager;
+
+	#endif
+
 
 	static EditorBuildCallback build_callbacks[MAX_BUILD_CALLBACKS];
 	static EditorPluginInitializeCallback plugin_init_callbacks[MAX_INIT_CALLBACKS];

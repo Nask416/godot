@@ -116,6 +116,12 @@
 #include "modules/gdscript/gdscript.h"
 #endif
 
+
+//MyCode Nask 2023/10/17
+#ifdef CUSTOM_FEATURE
+#include "../CustomFeature/register_customfeature_types.h"
+#endif
+
 /* Static members */
 
 // Singletons
@@ -573,6 +579,12 @@ Error Main::test_setup() {
 
 	ClassDB::set_current_api(ClassDB::API_CORE);
 #endif
+
+
+#ifdef CUSTOM_FEATURE
+	register_mycode_types();
+#endif
+
 	register_platform_apis();
 
 	// Theme needs modules to be initialized so that sub-resources can be loaded.
@@ -628,6 +640,12 @@ void Main::test_cleanup() {
 	uninitialize_modules(MODULE_INITIALIZATION_LEVEL_EDITOR);
 	unregister_editor_types();
 #endif
+
+#ifdef CUSTOM_FEATURE
+	unregister_mycode_types();
+#endif
+
+
 
 	GDExtensionManager::get_singleton()->deinitialize_extensions(GDExtension::INITIALIZATION_LEVEL_SCENE);
 	uninitialize_modules(MODULE_INITIALIZATION_LEVEL_SCENE);
@@ -2516,6 +2534,12 @@ Error Main::setup2() {
 
 #endif
 
+//MyCode NasK 2023/10/18
+#ifdef CUSTOM_FEATURE
+	register_customfeature_types();
+#endif
+
+
 	MAIN_PRINT("Main: Load Modules");
 
 	register_platform_apis();
@@ -3084,7 +3108,9 @@ bool Main::start() {
 
 			OS::get_singleton()->benchmark_end_measure("editor");
 		}
+
 #endif
+
 		sml->set_auto_accept_quit(GLOBAL_GET("application/config/auto_accept_quit"));
 		sml->set_quit_on_go_back(GLOBAL_GET("application/config/quit_on_go_back"));
 
@@ -3255,7 +3281,7 @@ bool Main::start() {
 
 			OS::get_singleton()->benchmark_end_measure("game_load");
 		}
-
+		
 #ifdef TOOLS_ENABLED
 		if (project_manager) {
 			OS::get_singleton()->benchmark_begin_measure("project_manager");
@@ -3275,7 +3301,7 @@ bool Main::start() {
 		}
 #endif
 	}
-
+	
 	if (!has_icon && OS::get_singleton()->get_bundle_icon_path().is_empty()) {
 		Ref<Image> icon = memnew(Image(app_icon_png));
 		DisplayServer::get_singleton()->set_icon(icon);
@@ -3286,7 +3312,7 @@ bool Main::start() {
 	if (movie_writer) {
 		movie_writer->begin(DisplayServer::get_singleton()->window_get_size(), fixed_fps, Engine::get_singleton()->get_write_movie_path());
 	}
-
+	
 	if (minimum_time_msec) {
 		uint64_t minimum_time = 1000 * minimum_time_msec;
 		uint64_t elapsed_time = OS::get_singleton()->get_ticks_usec();
@@ -3297,6 +3323,7 @@ bool Main::start() {
 
 	OS::get_singleton()->benchmark_end_measure("startup_begin");
 	OS::get_singleton()->benchmark_dump();
+
 
 	return true;
 }
@@ -3591,6 +3618,11 @@ void Main::cleanup(bool p_force) {
 	uninitialize_modules(MODULE_INITIALIZATION_LEVEL_EDITOR);
 	unregister_editor_types();
 
+#endif
+
+//MyCode NasK 2023/10/18
+#ifdef CUSTOM_FEATURE
+	unregister_customfeature_types();
 #endif
 
 	ImageLoader::cleanup();

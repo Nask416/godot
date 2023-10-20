@@ -1,4 +1,4 @@
-/**************************************************************************/
+﻿/**************************************************************************/
 /*  editor_node.cpp                                                       */
 /**************************************************************************/
 /*                         This file is part of:                          */
@@ -2977,6 +2977,15 @@ void EditorNode::_tool_menu_option(int p_idx) {
 		case TOOLS_ORPHAN_RESOURCES: {
 			orphan_resources->show();
 		} break;
+
+#ifdef CUSTOM_FEATURE
+			///MyCode NasK 2023/10/17
+		case TOOLS_NASK_CUSTOM: {
+			this->plugin_dgs_manager->show();
+
+		} break;
+			///////////////////////
+#endif
 		case TOOLS_CUSTOM: {
 			if (tool_menu->get_item_submenu(p_idx) == "") {
 				Callable callback = tool_menu->get_item_metadata(p_idx);
@@ -7453,6 +7462,11 @@ EditorNode::EditorNode() {
 	project_menu->add_submenu_item(TTR("Tools"), "Tools");
 	tool_menu->add_item(TTR("Orphan Resource Explorer..."), TOOLS_ORPHAN_RESOURCES);
 
+	#ifdef CUSTOM_FEATURE
+	//MyCode NasK 2023/10/17
+	tool_menu->add_item(String::utf8(u8"GDScriptPluginマネージャー"), TOOLS_NASK_CUSTOM);
+	#endif
+
 	project_menu->add_separator();
 	project_menu->add_shortcut(ED_SHORTCUT("editor/reload_current_project", TTR("Reload Current Project")), RELOAD_CURRENT_PROJECT);
 	ED_SHORTCUT_AND_COMMAND("editor/quit_to_project_list", TTR("Quit to Project List"), KeyModifierMask::CTRL + KeyModifierMask::SHIFT + Key::Q);
@@ -7792,6 +7806,15 @@ EditorNode::EditorNode() {
 
 	orphan_resources = memnew(OrphanResourcesDialog);
 	gui_base->add_child(orphan_resources);
+
+
+#ifdef CUSTOM_FEATURE
+	///MyCode NasK 2023/10/17
+	this->plugin_dgs_manager = memnew(NasK::PluginGDScriptManager);
+	gui_base->add_child(this->plugin_dgs_manager);
+	/////////////////////////
+#endif
+
 
 	confirmation = memnew(ConfirmationDialog);
 	gui_base->add_child(confirmation);
