@@ -5,7 +5,7 @@
 
 void register_customfeature_types()
 {
-	GDREGISTER_CLASS(NasK::PluginGDScriptManager);
+	GDREGISTER_CLASS(NasK::GlobalPluginSettings);
 }
 
 void unregister_customfeature_types()

@@ -4429,6 +4429,12 @@ String String::path_to(const String &p_path) const {
 		src = src.replace("user://", "/");
 		dst = dst.replace("user://", "/");
 
+//NasK 2023/11/10
+#if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
+	} else if (src.begins_with("gdp://") && dst.begins_with("gdp://")) {
+		src = src.replace("gdp://", "/");
+		dst = dst.replace("gdp://", "/");
+#endif
 	} else if (src.begins_with("/") && dst.begins_with("/")) {
 		//nothing
 	} else {
@@ -4557,6 +4563,15 @@ bool String::is_valid_ip_address() const {
 bool String::is_resource_file() const {
 	return begins_with("res://") && find("::") == -1;
 }
+
+
+//NasK 2023/11/10
+#if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
+bool String::is_global_plugin_file() const {
+	return begins_with("gpd://") && find("::") == -1;
+}
+#endif
+
 
 bool String::is_relative_path() const {
 	return !is_absolute_path();
@@ -4771,7 +4786,7 @@ String String::lpad(int min_length, const String &character) const {
 	return s;
 }
 
-// sprintf is implemented in GDScript via:
+// sprintf is implemented in #if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED) via:
 //   "fish %s pie" % "frog"
 //   "fish %s %d pie" % ["frog", 12]
 // In case of an error, the string returned is the error description and "error" is true.

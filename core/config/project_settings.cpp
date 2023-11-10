@@ -262,6 +262,17 @@ String ProjectSettings::globalize_path(const String &p_path) const {
 		}
 		return p_path.replace("user://", "");
 	}
+//NasK 2023/11/09
+#if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
+	else if(p_path.begins_with("gpd://"))
+	{
+		String data_dir = OS::get_singleton()->get_global_plugin_dir();
+		if (!data_dir.is_empty()) {
+			return p_path.replace("gpd:/", data_dir);
+		}
+		return p_path.replace("gpd://", "");
+	}
+#endif
 
 	return p_path;
 }

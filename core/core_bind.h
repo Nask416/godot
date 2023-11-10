@@ -229,6 +229,12 @@ public:
 	String get_data_dir() const;
 	String get_cache_dir() const;
 
+	//NasK 2023/11/09
+#if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
+	String get_global_plugin_dir() const;
+#endif
+
+
 	Error set_thread_name(const String &p_name);
 	Thread::ID get_thread_caller_id() const;
 	Thread::ID get_main_thread_id() const;

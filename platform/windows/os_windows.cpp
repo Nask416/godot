@@ -182,6 +182,12 @@ void OS_Windows::initialize() {
 	DirAccess::make_default<DirAccessWindows>(DirAccess::ACCESS_USERDATA);
 	DirAccess::make_default<DirAccessWindows>(DirAccess::ACCESS_FILESYSTEM);
 
+		//NasK 2023/11/09
+#if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
+	FileAccess::make_default<FileAccessWindows>(FileAccess::ACCESS_GLOBAL_PLUGIN);
+	DirAccess::make_default<DirAccessWindows>(DirAccess::ACCESS_GLOBAL_PLUGIN);
+#endif
+
 	NetSocketPosix::make_default();
 
 	// We need to know how often the clock is updated

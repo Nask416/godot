@@ -1,4 +1,4 @@
-/**************************************************************************/
+﻿/**************************************************************************/
 /*  memory.cpp                                                            */
 /**************************************************************************/
 /*                         This file is part of:                          */
@@ -35,6 +35,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+
+#ifdef NK_ALLOC_ENABLE
+#include <godot_nkalloc.h>
+#endif
 
 void *operator new(size_t p_size, const char *p_description) {
 	return Memory::alloc_static(p_size, false);
@@ -74,7 +78,8 @@ void *Memory::alloc_static(size_t p_bytes, bool p_pad_align) {
 
 //Nask 2023/10/20
 #ifdef NK_ALLOC_ENABLE
-	void *mem = nkalloc.Allocate<void*>(p_bytes + (prepad ? PAD_ALIGN : 0));
+	void *mem = gd_nk_malloc(p_bytes + (prepad ? PAD_ALIGN : 0));
+	//void *mem = malloc(p_bytes + (prepad ? PAD_ALIGN : 0));
 #else
 	void *mem = malloc(p_bytes + (prepad ? PAD_ALIGN : 0));
 #endif // NK_ALLOC_ENABLE
@@ -129,7 +134,8 @@ void *Memory::realloc_static(void *p_memory, size_t p_bytes, bool p_pad_align) {
 		if (p_bytes == 0) {
 //Nask 2023/10/20
 #ifdef NK_ALLOC_ENABLE
-			nkalloc.Release(mem);
+			gd_nk_free((void*)mem);
+			//free(mem);
 #else
 			free(mem);
 #endif
@@ -137,7 +143,13 @@ void *Memory::realloc_static(void *p_memory, size_t p_bytes, bool p_pad_align) {
 		} else {
 			*s = p_bytes;
 
+//Nask 2023/10/20
+#ifdef NK_ALLOC_ENABLE
+			mem = (uint8_t *)gd_nk_realloc((void*)mem, p_bytes + PAD_ALIGN);
+			//mem = (uint8_t *)realloc(mem, p_bytes + PAD_ALIGN);
+#else
 			mem = (uint8_t *)realloc(mem, p_bytes + PAD_ALIGN);
+#endif
 			ERR_FAIL_COND_V(!mem, nullptr);
 
 			s = (uint64_t *)mem;
@@ -147,8 +159,14 @@ void *Memory::realloc_static(void *p_memory, size_t p_bytes, bool p_pad_align) {
 			return mem + PAD_ALIGN;
 		}
 	} else {
-		mem = (uint8_t *)realloc(mem, p_bytes);
 
+//Nask 2023/10/20
+#ifdef NK_ALLOC_ENABLE
+		mem = (uint8_t*)gd_nk_realloc((void*)mem, p_bytes);
+		//mem = (uint8_t *)realloc(mem, p_bytes);
+#else
+		mem = (uint8_t *)realloc(mem, p_bytes);
+#endif
 		ERR_FAIL_COND_V(mem == nullptr && p_bytes > 0, nullptr);
 
 		return mem;
@@ -176,9 +194,21 @@ void Memory::free_static(void *p_ptr, bool p_pad_align) {
 		mem_usage.sub(*s);
 #endif
 
+//Nask 2023/10/20
+#ifdef NK_ALLOC_ENABLE
+		gd_nk_free((void*)mem);
+		//free(mem);
+#else
 		free(mem);
+#endif
 	} else {
+		//Nask 2023/10/20
+#ifdef NK_ALLOC_ENABLE
+		gd_nk_free((void *)mem);
+		//free(mem);
+#else
 		free(mem);
+#endif
 	}
 }
 

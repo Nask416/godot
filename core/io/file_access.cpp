@@ -38,7 +38,13 @@
 #include "core/io/marshalls.h"
 #include "core/os/os.h"
 
+//NasK 2023/11/09
+#if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
+#include "../../CustomFeature/global_plugin_settings.h"
+FileAccess::CreateFunc FileAccess::create_func[ACCESS_MAX] = { nullptr, nullptr, nullptr, nullptr };
+#else
 FileAccess::CreateFunc FileAccess::create_func[ACCESS_MAX] = { nullptr, nullptr };
+#endif
 
 FileAccess::FileCloseFailNotify FileAccess::close_fail_notify = nullptr;
 
@@ -75,7 +81,11 @@ Ref<FileAccess> FileAccess::create_for_path(const String &p_path) {
 		ret = create(ACCESS_RESOURCES);
 	} else if (p_path.begins_with("user://")) {
 		ret = create(ACCESS_USERDATA);
-
+//NasK 2023/11/09
+#if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
+	} else if (p_path.begins_with("gpd://")) {
+		ret = create(ACCESS_GLOBAL_PLUGIN);
+#endif
 	} else {
 		ret = create(ACCESS_FILESYSTEM);
 	}
@@ -209,6 +219,19 @@ String FileAccess::fix_path(const String &p_path) const {
 			}
 
 		} break;
+//NasK 2023/11/09
+#if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
+		case ACCESS_GLOBAL_PLUGIN: {
+			if (r_path.begins_with("gpd://")) {
+				String data_dir = OS::get_singleton()->get_global_plugin_dir();
+				if (!data_dir.is_empty()) {
+					return r_path.replace("gpd:/", data_dir);
+				}
+				return r_path.replace("gpd://", "");
+			}
+
+		} break;
+#endif
 		case ACCESS_FILESYSTEM: {
 			return r_path;
 		} break;

@@ -509,6 +509,17 @@ String OS::get_cache_dir() const {
 	return ::OS::get_singleton()->get_cache_path();
 }
 
+//NasK 2023/11/09
+#if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
+String OS::get_global_plugin_dir() const {
+	// Exposed as `get_cache_dir()` instead of `get_cache_path()` for consistency with other exposed OS methods.
+	return ::OS::get_singleton()->get_global_plugin_dir();
+}
+#endif
+
+
+
+
 bool OS::is_debug_build() const {
 #ifdef DEBUG_ENABLED
 	return true;
@@ -640,6 +651,14 @@ void OS::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("request_permission", "name"), &OS::request_permission);
 	ClassDB::bind_method(D_METHOD("request_permissions"), &OS::request_permissions);
 	ClassDB::bind_method(D_METHOD("get_granted_permissions"), &OS::get_granted_permissions);
+
+
+//NasK 2023/11/09
+#if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
+	ClassDB::bind_method(D_METHOD("get_global_plugin_dir"), &OS::get_global_plugin_dir);
+#endif
+
+
 
 	ADD_PROPERTY(PropertyInfo(Variant::BOOL, "low_processor_usage_mode"), "set_low_processor_usage_mode", "is_in_low_processor_usage_mode");
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "low_processor_usage_mode_sleep_usec"), "set_low_processor_usage_mode_sleep_usec", "get_low_processor_usage_mode_sleep_usec");

@@ -1,4 +1,4 @@
-﻿#include "PluginGDScript.h"
+﻿#include "global_plugin_settings.h"
 #include "core/object/class_db.h"
 
 

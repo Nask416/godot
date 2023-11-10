@@ -1,4 +1,4 @@
-/**************************************************************************/
+Ôªø/**************************************************************************/
 /*  editor_node.h                                                         */
 /**************************************************************************/
 /*                         This file is part of:                          */
@@ -36,11 +36,6 @@
 #include "editor/editor_folding.h"
 #include "editor/editor_plugin.h"
 
-#ifdef CUSTOM_FEATURE
-///MyCode NasK 2023/10/17
-#include "../CustomFeature/PluginGDScript.h"
-/////////////////////////
-#endif
 
 
 typedef void (*EditorNodeInitCallback)();
@@ -196,13 +191,6 @@ private:
 		TOOLS_BUILD_PROFILE_MANAGER,
 		TOOLS_CUSTOM,
 
-#ifdef CUSTOM_FEATURE
-		/// <summary>
-		/// MyCode NasK 2023/10/17
-		/// é©çÏÉvÉâÉOÉCÉìópÇÃíËêî
-		/// </summary>
-		TOOLS_NASK_CUSTOM,
-#endif
 		RESOURCE_SAVE,
 		RESOURCE_SAVE_AS,
 
@@ -513,15 +501,6 @@ private:
 	PrintHandlerList print_handler;
 
 	HashMap<String, Ref<Texture2D>> icon_type_cache;
-
-	#ifdef CUSTOM_FEATURE
-	/// <summary>
-	/// MyCode NasK 2023/10/17
-	/// ÉvÉâÉOÉCÉìä«óùÉ}ÉlÅ[ÉWÉÉÅ[ÇÃÉ|ÉCÉìÉ^Å[
-	/// </summary>
-	NasK::PluginGDScriptManager *plugin_dgs_manager;
-
-	#endif
 
 
 	static EditorBuildCallback build_callbacks[MAX_BUILD_CALLBACKS];

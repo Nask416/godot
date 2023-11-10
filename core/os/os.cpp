@@ -38,6 +38,11 @@
 #include "core/os/midi_driver.h"
 #include "core/version_generated.gen.h"
 
+//NasK 2023/11/10
+#if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
+#include "../../CustomFeature/global_plugin_settings.h"
+#endif
+
 #include <stdarg.h>
 #include <thread>
 
@@ -284,6 +289,15 @@ String OS::get_user_data_dir() const {
 String OS::get_resource_dir() const {
 	return ProjectSettings::get_singleton()->get_resource_path();
 }
+
+
+//NasK 2023/11/10 gdp://
+#if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
+String OS::get_global_plugin_dir() const {
+	return NasK::GlobalPluginSettings::get_singleton()->get_global_plugin_dir();
+}
+#endif
+
 
 // Access system-specific dirs like Documents, Downloads, etc.
 String OS::get_system_dir(SystemDir p_dir, bool p_shared_storage) const {

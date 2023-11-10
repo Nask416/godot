@@ -36,6 +36,12 @@
 #include "core/os/os.h"
 #include "core/templates/local_vector.h"
 
+//NasK 2023/11/10
+#if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
+#include "../../CustomFeature/global_plugin_settings.h"
+#endif
+
+
 thread_local Error DirAccess::last_dir_open_error = OK;
 
 String DirAccess::_get_root_path() const {
@@ -44,6 +50,11 @@ String DirAccess::_get_root_path() const {
 			return ProjectSettings::get_singleton()->get_resource_path();
 		case ACCESS_USERDATA:
 			return OS::get_singleton()->get_user_data_dir();
+//NasK 2023/11/10
+#if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
+		case ACCESS_GLOBAL_PLUGIN:
+			return NasK::GlobalPluginSettings::get_singleton()->get_global_plugin_dir();
+#endif
 		default:
 			return "";
 	}
@@ -55,6 +66,11 @@ String DirAccess::_get_root_string() const {
 			return "res://";
 		case ACCESS_USERDATA:
 			return "user://";
+//NasK 2023/11/10
+#if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
+		case ACCESS_GLOBAL_PLUGIN:
+			return "gpd://";
+#endif
 		default:
 			return "";
 	}
@@ -154,6 +170,12 @@ Error DirAccess::make_dir_recursive(String p_dir) {
 		base = "res://";
 	} else if (full_dir.begins_with("user://")) {
 		base = "user://";
+
+//NasK 2023/11/09
+#if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
+	} else if (full_dir.begins_with("gpd://")) {
+			base = "gpd://";
+#endif
 	} else if (full_dir.is_network_share_path()) {
 		int pos = full_dir.find("/", 2);
 		ERR_FAIL_COND_V(pos < 0, ERR_INVALID_PARAMETER);
@@ -212,6 +234,18 @@ String DirAccess::fix_path(String p_path) const {
 			}
 
 		} break;
+//NasK 2023/11/10
+#if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
+		case ACCESS_GLOBAL_PLUGIN: {
+			if (p_path.begins_with("gpd://")) {
+				String data_dir = NasK::GlobalPluginSettings::get_singleton()->get_global_plugin_dir();
+				if (!data_dir.is_empty()) {
+					return p_path.replace_first("gpd:/", data_dir);
+				}
+				return p_path.replace_first("gpd://", "");
+			}
+		} break;
+#endif
 		case ACCESS_FILESYSTEM: {
 			return p_path;
 		} break;
@@ -230,6 +264,11 @@ Ref<DirAccess> DirAccess::create_for_path(const String &p_path) {
 		da = create(ACCESS_RESOURCES);
 	} else if (p_path.begins_with("user://")) {
 		da = create(ACCESS_USERDATA);
+//NasK 2023/11/10
+#if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
+	} else if (p_path.begins_with("gpd://")) {
+		da = create(ACCESS_GLOBAL_PLUGIN);
+#endif
 	} else {
 		da = create(ACCESS_FILESYSTEM);
 	}
@@ -318,6 +357,13 @@ Ref<DirAccess> DirAccess::create(AccessType p_access) {
 		} else if (p_access == ACCESS_USERDATA) {
 			da->change_dir("user://");
 		}
+//NasK 2023/11/10
+#if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
+		else if (p_access == ACCESS_GLOBAL_PLUGIN) {
+			da->change_dir("gpd://");
+		}
+#endif
+
 	}
 
 	return da;

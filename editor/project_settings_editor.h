@@ -42,6 +42,11 @@
 #include "editor/shader_globals_editor.h"
 #include "scene/gui/tab_container.h"
 
+//NasK 2023/11/09
+#if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
+#include "../CustomFeature/global_plugin_settings.h"
+#endif
+
 class FileSystemDock;
 
 class ProjectSettingsEditor : public AcceptDialog {
@@ -59,6 +64,11 @@ class ProjectSettingsEditor : public AcceptDialog {
 	EditorAutoloadSettings *autoload_settings = nullptr;
 	ShaderGlobalsEditor *shaders_global_shader_uniforms_editor = nullptr;
 	EditorPluginSettings *plugin_settings = nullptr;
+
+//NasK 2023/11/09
+#if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
+	NasK::GlobalPluginSettings *global_plugin_settings = nullptr;
+#endif
 
 	LineEdit *search_box = nullptr;
 	CheckButton *advanced = nullptr;

@@ -413,6 +413,12 @@ public:
 
 	// path functions
 	bool is_absolute_path() const;
+
+//NasK 2023/11/10
+#if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
+	bool is_global_plugin_file() const;
+#endif
+
 	bool is_relative_path() const;
 	bool is_resource_file() const;
 	String path_to(const String &p_path) const;

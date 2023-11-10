@@ -64,6 +64,11 @@ void ProjectSettingsEditor::popup_project_settings(bool p_clear_filter) {
 	plugin_settings->update_plugins();
 	import_defaults_editor->clear();
 
+//NasK 2023/11/09
+#if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
+	this->global_plugin_settings->update_plugins();
+#endif
+
 	if (p_clear_filter) {
 		search_box->clear();
 	}
@@ -76,6 +81,10 @@ void ProjectSettingsEditor::queue_save() {
 
 void ProjectSettingsEditor::set_plugins_page() {
 	tab_container->set_current_tab(tab_container->get_tab_idx_from_control(plugin_settings));
+//NasK 2023/11/09
+#if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
+	tab_container->set_current_tab(tab_container->get_tab_idx_from_control(this->global_plugin_settings));
+#endif
 }
 
 void ProjectSettingsEditor::set_general_page(const String &p_category) {
@@ -85,6 +94,12 @@ void ProjectSettingsEditor::set_general_page(const String &p_category) {
 
 void ProjectSettingsEditor::update_plugins() {
 	plugin_settings->update_plugins();
+
+//NasK 2023/11/09
+#if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
+	this->global_plugin_settings->update_plugins();
+#endif
+
 }
 
 void ProjectSettingsEditor::_setting_edited(const String &p_name) {
@@ -712,6 +727,13 @@ ProjectSettingsEditor::ProjectSettingsEditor(EditorData *p_data) {
 	plugin_settings = memnew(EditorPluginSettings);
 	plugin_settings->set_name(TTR("Plugins"));
 	tab_container->add_child(plugin_settings);
+
+	//NasK 2023/11/09
+#if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
+	this->global_plugin_settings = memnew(NasK::GlobalPluginSettings);
+	this->global_plugin_settings->set_name("GlobalPlugin");
+	this->tab_container->add_child(this->global_plugin_settings);
+#endif
 
 	timer = memnew(Timer);
 	timer->set_wait_time(1.5);

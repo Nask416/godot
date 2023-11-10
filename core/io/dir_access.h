@@ -44,7 +44,14 @@ public:
 		ACCESS_RESOURCES,
 		ACCESS_USERDATA,
 		ACCESS_FILESYSTEM,
+
+//NasK 2023/11/10
+#if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
+		ACCESS_GLOBAL_PLUGIN,
+#endif
+
 		ACCESS_MAX
+
 	};
 
 	typedef Ref<DirAccess> (*CreateFunc)();

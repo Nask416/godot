@@ -266,6 +266,12 @@ public:
 	virtual String get_user_data_dir() const;
 	virtual String get_resource_dir() const;
 
+
+//NasK 2023/11/09
+#if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
+	virtual String get_global_plugin_dir() const;
+#endif
+
 	enum SystemDir {
 		SYSTEM_DIR_DESKTOP,
 		SYSTEM_DIR_DCIM,

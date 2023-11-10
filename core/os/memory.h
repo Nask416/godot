@@ -1,4 +1,4 @@
-/**************************************************************************/
+﻿/**************************************************************************/
 /*  memory.h                                                              */
 /**************************************************************************/
 /*                         This file is part of:                          */
@@ -41,12 +41,6 @@
 #ifndef PAD_ALIGN
 #define PAD_ALIGN 16 //must always be greater than this at much
 #endif
-
-//NasK 2023/10/20
-#ifdef NK_ALLOC_ENABLE
-#include<nkAllocator.hpp>
-#endif
-
 
 
 class Memory {

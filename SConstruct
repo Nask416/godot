@@ -58,7 +58,7 @@ import gles3_builders
 import scu_builders
 from platform_methods import architectures, architecture_aliases, generate_export_icons
 
-if ARGUMENTS.get("target", "editor") == "editor" or ARGUMENTS.get("target", "editor") == "editor_release":
+if ARGUMENTS.get("target", "editor_debug") == "editor" or ARGUMENTS.get("target", "editor_debug") == "editor_release":
     _helper_module("editor.editor_builders", "editor/editor_builders.py")
     _helper_module("editor.template_builders", "editor/template_builders.py")
 
@@ -72,6 +72,7 @@ platform_exporters = []
 platform_apis = []
 
 time_at_start = time.time()
+
 
 for x in sorted(glob.glob("platform/*")):
     if not os.path.isdir(x) or not os.path.exists(x + "/detect.py"):
@@ -122,6 +123,7 @@ elif os.name == "nt" and methods.get_cmdline_bool("use_mingw", False):
 # want to have to pull in manually.
 # Then we prepend PATH to make it take precedence, while preserving SCons' own entries.
 env_base = Environment(tools=custom_tools)
+
 env_base.PrependENVPath("PATH", os.getenv("PATH"))
 env_base.PrependENVPath("PKG_CONFIG_PATH", os.getenv("PKG_CONFIG_PATH"))
 if "TERM" in os.environ:  # Used for colored output.
@@ -155,7 +157,6 @@ env_base["x86_libtheora_opt_vc"] = False
 env_base.SConsignFile(".sconsign{0}.dblite".format(pickle.HIGHEST_PROTOCOL))
 
 # Build options
-
 customs = ["custom.py"]
 
 profile = ARGUMENTS.get("profile", "")
@@ -167,10 +168,11 @@ if profile:
 
 opts = Variables(customs, ARGUMENTS)
 
+
 # Target build options
 opts.Add("platform", "Target platform (%s)" % ("|".join(platform_list),), "")
 opts.Add("p", "Platform (alias for 'platform')", "")
-opts.Add(EnumVariable("target", "Compilation target", "editor", ("editor","editor_release", "template_release", "template_debug")))
+opts.Add(EnumVariable("target", "Compilation target", "editor", ("editor_debug","editor_release", "template_release", "template_debug")))
 opts.Add(EnumVariable("arch", "CPU architecture", "auto", ["auto"] + architectures, architecture_aliases))
 opts.Add(BoolVariable("dev_build", "Developer build with dev-only debugging code (DEV_ENABLED)", False))
 opts.Add(
@@ -267,7 +269,9 @@ opts.Update(env_base)
 
 
 #追加機能有効オプション
-opts.Add(BoolVariable("CustomFeatureEnable", "Custom feature and enable.", False))
+opts.Add(BoolVariable("CustomFeatureEnable", "Custom feature enable.", False))
+opts.Add(BoolVariable("nkAllocatorEnable", "nkAllocator enable.", False))
+
 
 
 # Platform selection: validate input, and add options.
@@ -411,15 +415,19 @@ env_base.platform_apis = platform_apis
 # - Optimization level
 # - Debug symbols for crash traces / debuggers
 
-env_base.editor_build = env_base["target"] == "editor" or env_base["target"] == "editor_release"
+env_base.editor_build = env_base["target"] == "editor_debug" or env_base["target"] == "editor_release"
 env_base.dev_build = env_base["dev_build"]
-env_base.debug_features = env_base["target"] in ["editor", "template_debug","editor_release"]
+env_base.debug_features = env_base["target"] in ["editor_debug", "template_debug","editor_release"]
 
 if env_base.dev_build:
     opt_level = "none"
 elif env_base.debug_features:
     opt_level = "speed_trace"
 else:  # Release
+    opt_level = "speed"
+
+
+if env_base["target"] in ["editor_release"]:
     opt_level = "speed"
 
 env_base["optimize"] = ARGUMENTS.get("optimize", opt_level)
@@ -444,6 +452,14 @@ else:
 #追加機能のプリプロセッサを追加
 if env_base["CustomFeatureEnable"]:
     env_base.Append(CPPDEFINES=["CUSTOM_FEATURE"])
+
+#nkAllocatorの利用
+if env_base["nkAllocatorEnable"]:
+    env_base.Append(CPPDEFINES=["NK_ALLOC_ENABLE"])
+    env_base.Append(LINKFLAGS=["nkAllocator.lib"])
+
+
+
 
 
 # SCons speed optimization controlled by the `fast_unsafe` option, which provide
@@ -478,6 +494,10 @@ if selected_platform in platform_list:
     import detect
 
     env = env_base.Clone()
+
+
+    #import pdb; pdb.set_trace() # 追加
+
 
     # Default num_jobs to local cpu count if not user specified.
     # SCons has a peculiarity where user-specified options won't be overridden
@@ -582,6 +602,9 @@ if selected_platform in platform_list:
 
         if env["optimize"] == "speed":
             env.Append(CCFLAGS=["/O2"])
+            env.Append(CCFLAGS=["/Oi"])
+            env.Append(CCFLAGS=["/Ot"])
+            env.Append(CCFLAGS=["/Ob2"])
             env.Append(LINKFLAGS=["/OPT:REF"])
         elif env["optimize"] == "speed_trace":
             env.Append(CCFLAGS=["/O2"])
@@ -636,6 +659,9 @@ if selected_platform in platform_list:
         # MSVC doesn't have clear C standard support, /std only covers C++.
         # We apply it to CCFLAGS (both C and C++ code) in case it impacts C features.
         env.Prepend(CCFLAGS=["/std:c++17"])
+
+        #C++ランタイムの指定
+        #env.Prepend(CCFLAGS=["/MDd"])
 
     # Enforce our minimal compiler version requirements
     cc_version = methods.get_compiler_version(env) or {

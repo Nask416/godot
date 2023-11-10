@@ -2977,15 +2977,6 @@ void EditorNode::_tool_menu_option(int p_idx) {
 		case TOOLS_ORPHAN_RESOURCES: {
 			orphan_resources->show();
 		} break;
-
-#ifdef CUSTOM_FEATURE
-			///MyCode NasK 2023/10/17
-		case TOOLS_NASK_CUSTOM: {
-			this->plugin_dgs_manager->show();
-
-		} break;
-			///////////////////////
-#endif
 		case TOOLS_CUSTOM: {
 			if (tool_menu->get_item_submenu(p_idx) == "") {
 				Callable callback = tool_menu->get_item_metadata(p_idx);
@@ -3309,7 +3300,14 @@ void EditorNode::_update_addon_config() {
 void EditorNode::set_addon_plugin_enabled(const String &p_addon, bool p_enabled, bool p_config_changed) {
 	String addon_path = p_addon;
 
-	if (!addon_path.begins_with("res://")) {
+//NasK 2023/11/10
+#if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
+	if(addon_path.begins_with("gpd://"))
+	{
+		//gpdであれば何もしない
+	} else
+#endif
+	if(!addon_path.begins_with("res://")) {
 		addon_path = "res://addons/" + addon_path + "/plugin.cfg";
 	}
 
@@ -3393,6 +3391,13 @@ bool EditorNode::is_addon_plugin_enabled(const String &p_addon) const {
 	if (p_addon.begins_with("res://")) {
 		return addon_name_to_plugin.has(p_addon);
 	}
+
+	//NasK 2023/11/10
+#if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
+	if (p_addon.begins_with("gpd://")) {
+		return addon_name_to_plugin.has(p_addon);
+	}
+#endif
 
 	return addon_name_to_plugin.has("res://addons/" + p_addon + "/plugin.cfg");
 }
@@ -7462,11 +7467,7 @@ EditorNode::EditorNode() {
 	project_menu->add_submenu_item(TTR("Tools"), "Tools");
 	tool_menu->add_item(TTR("Orphan Resource Explorer..."), TOOLS_ORPHAN_RESOURCES);
 
-	#ifdef CUSTOM_FEATURE
-	//MyCode NasK 2023/10/17
-	tool_menu->add_item(String::utf8(u8"GDScriptPluginマネージャー"), TOOLS_NASK_CUSTOM);
-	#endif
-
+	
 	project_menu->add_separator();
 	project_menu->add_shortcut(ED_SHORTCUT("editor/reload_current_project", TTR("Reload Current Project")), RELOAD_CURRENT_PROJECT);
 	ED_SHORTCUT_AND_COMMAND("editor/quit_to_project_list", TTR("Quit to Project List"), KeyModifierMask::CTRL + KeyModifierMask::SHIFT + Key::Q);
@@ -7806,15 +7807,6 @@ EditorNode::EditorNode() {
 
 	orphan_resources = memnew(OrphanResourcesDialog);
 	gui_base->add_child(orphan_resources);
-
-
-#ifdef CUSTOM_FEATURE
-	///MyCode NasK 2023/10/17
-	this->plugin_dgs_manager = memnew(NasK::PluginGDScriptManager);
-	gui_base->add_child(this->plugin_dgs_manager);
-	/////////////////////////
-#endif
-
 
 	confirmation = memnew(ConfirmationDialog);
 	gui_base->add_child(confirmation);
