@@ -1,0 +1,66 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "godot", "godot.vcxproj", "{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		editor_debug_openGL[mono]|Win32 = editor_debug_openGL[mono]|Win32
+		editor_debug_openGL[mono]|x64 = editor_debug_openGL[mono]|x64
+		editor_debug_vulkan[mono]|Win32 = editor_debug_vulkan[mono]|Win32
+		editor_debug_vulkan[mono]|x64 = editor_debug_vulkan[mono]|x64
+		editor_debug|Win32 = editor_debug|Win32
+		editor_debug|x64 = editor_debug|x64
+		editor_release_openGL[mono]|Win32 = editor_release_openGL[mono]|Win32
+		editor_release_openGL[mono]|x64 = editor_release_openGL[mono]|x64
+		template_debug_[mono]|Win32 = template_debug_[mono]|Win32
+		template_debug_[mono]|x64 = template_debug_[mono]|x64
+		template_debug|Win32 = template_debug|Win32
+		template_debug|x64 = template_debug|x64
+		template_release_[mono]|Win32 = template_release_[mono]|Win32
+		template_release_[mono]|x64 = template_release_[mono]|x64
+		template_release|Win32 = template_release|Win32
+		template_release|x64 = template_release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.editor_debug_openGL[mono]|Win32.ActiveCfg = editor_debug_openGL[mono]|Win32
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.editor_debug_openGL[mono]|Win32.Build.0 = editor_debug_openGL[mono]|Win32
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.editor_debug_openGL[mono]|x64.ActiveCfg = editor_debug_openGL[mono]|x64
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.editor_debug_openGL[mono]|x64.Build.0 = editor_debug_openGL[mono]|x64
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.editor_debug_vulkan[mono]|Win32.ActiveCfg = editor_debug_vulkan[mono]|Win32
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.editor_debug_vulkan[mono]|Win32.Build.0 = editor_debug_vulkan[mono]|Win32
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.editor_debug_vulkan[mono]|x64.ActiveCfg = editor_debug_vulkan[mono]|x64
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.editor_debug_vulkan[mono]|x64.Build.0 = editor_debug_vulkan[mono]|x64
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.editor_debug|Win32.ActiveCfg = editor_debug|Win32
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.editor_debug|Win32.Build.0 = editor_debug|Win32
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.editor_debug|x64.ActiveCfg = editor_debug_vulkan[mono]|x64
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.editor_debug|x64.Build.0 = editor_debug_vulkan[mono]|x64
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.editor_release_openGL[mono]|Win32.ActiveCfg = editor_release_openGL[mono]|Win32
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.editor_release_openGL[mono]|Win32.Build.0 = editor_release_openGL[mono]|Win32
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.editor_release_openGL[mono]|x64.ActiveCfg = editor_release_openGL[mono]|x64
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.editor_release_openGL[mono]|x64.Build.0 = editor_release_openGL[mono]|x64
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.template_debug_[mono]|Win32.ActiveCfg = template_debug_[mono]|Win32
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.template_debug_[mono]|Win32.Build.0 = template_debug_[mono]|Win32
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.template_debug_[mono]|x64.ActiveCfg = template_debug_[mono]|x64
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.template_debug_[mono]|x64.Build.0 = template_debug_[mono]|x64
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.template_debug|Win32.ActiveCfg = template_debug|Win32
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.template_debug|Win32.Build.0 = template_debug|Win32
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.template_debug|x64.ActiveCfg = template_debug|x64
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.template_debug|x64.Build.0 = template_debug|x64
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.template_release_[mono]|Win32.ActiveCfg = template_release_[mono]|Win32
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.template_release_[mono]|Win32.Build.0 = template_release_[mono]|Win32
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.template_release_[mono]|x64.ActiveCfg = template_release_[mono]|x64
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.template_release_[mono]|x64.Build.0 = template_release_[mono]|x64
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.template_release|Win32.ActiveCfg = template_release|Win32
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.template_release|Win32.Build.0 = template_release|Win32
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.template_release|x64.ActiveCfg = template_release|x64
+		{7F6FB482-3F53-5C0F-8BBA-A350A8D6A629}.template_release|x64.Build.0 = template_release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E87E3C63-DAF3-4208-866C-20DB5431FE19}
+	EndGlobalSection
+EndGlobal
