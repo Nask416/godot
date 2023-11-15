@@ -28,8 +28,8 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-
 #ifdef NK_ALLOC_ENABLE
+
 #include <godot_nkalloc.h>
 MAIN_THREAD_BIND
 #endif

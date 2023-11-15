@@ -36,6 +36,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//NasK 2023/11/14
 #ifdef NK_ALLOC_ENABLE
 #include <godot_nkalloc.h>
 #endif

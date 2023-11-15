@@ -16,7 +16,7 @@ namespace NasK
 		GDCLASS(GlobalPluginSettings, VBoxContainer);
 
 	private:
-		static constexpr char PLUGIN_FOLDER_NAME[] = u8"addons";
+		static constexpr char PLUGIN_FOLDER_NAME[] = u8"global_addons/addons";
 
 		inline static GlobalPluginSettings *singleton;
 

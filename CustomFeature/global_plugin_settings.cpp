@@ -81,7 +81,7 @@ void NasK::GlobalPluginSettings::_plugin_directory_open()
 	Ref<DirAccess> da = DirAccess::open(this->plugin_folder,&err);
 
 	if (err != OK) {
-		err = DirAccess::make_dir_absolute(this->plugin_folder);
+		err = DirAccess::make_dir_recursive_absolute(this->plugin_folder);
 
 		if(err == OK)
 		{
