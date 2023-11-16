@@ -2,4 +2,7 @@
 
 Import("env")
 
-env.add_source_files(env.editor_sources, "*.cpp")
+env.custom_feature_sources = []
+env.add_source_files(env.custom_feature_sources, "*.cpp")
+lib = env.add_library("custom_feature", env.custom_feature_sources)
+env.Prepend(LIBS=[lib])

@@ -6683,12 +6683,15 @@ void EditorNode::_print_handler(void *p_this, const String &p_string, bool p_err
 }
 
 void EditorNode::_print_handler_impl(const String &p_string, bool p_error, bool p_rich) {
-	if (p_error) {
-		singleton->log->add_message(p_string, EditorLog::MSG_TYPE_ERROR);
-	} else if (p_rich) {
-		singleton->log->add_message(p_string, EditorLog::MSG_TYPE_STD_RICH);
-	} else {
-		singleton->log->add_message(p_string, EditorLog::MSG_TYPE_STD);
+	
+	if (EditorNode::singleton != nullptr) {
+		if (p_error) {
+			singleton->log->add_message(p_string, EditorLog::MSG_TYPE_ERROR);
+		} else if (p_rich) {
+			singleton->log->add_message(p_string, EditorLog::MSG_TYPE_STD_RICH);
+		} else {
+			singleton->log->add_message(p_string, EditorLog::MSG_TYPE_STD);
+		}
 	}
 }
 
@@ -8160,6 +8163,9 @@ EditorNode::~EditorNode() {
 	memdelete(progress_hb);
 
 	EditorSettings::destroy();
+
+	EditorNode::singleton = nullptr;
+
 }
 
 /*
