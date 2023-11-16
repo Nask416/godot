@@ -1534,3 +1534,9 @@ DynamicFontImportSettings::DynamicFontImportSettings() {
 	set_ok_button_text(TTR("Reimport"));
 	set_cancel_button_text(TTR("Close"));
 }
+
+DynamicFontImportSettings::~DynamicFontImportSettings()
+{
+	if (this->singleton == this)
+		this->singleton = nullptr;
+}

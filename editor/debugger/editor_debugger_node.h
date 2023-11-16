@@ -126,6 +126,8 @@ private:
 	static EditorDebuggerNode *singleton;
 	EditorDebuggerNode();
 
+	~EditorDebuggerNode();
+
 protected:
 	void _debugger_stopped(int p_id);
 	void _debugger_wants_stop(int p_id);

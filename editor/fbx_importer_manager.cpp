@@ -1,4 +1,4 @@
-/**************************************************************************/
+﻿/**************************************************************************/
 /*  fbx_importer_manager.cpp                                              */
 /**************************************************************************/
 /*                         This file is part of:                          */
@@ -175,4 +175,10 @@ FBXImporterManager::FBXImporterManager() {
 	browse_dialog->connect("file_selected", callable_mp(this, &FBXImporterManager::_select_file));
 
 	add_child(browse_dialog);
+}
+
+FBXImporterManager::~FBXImporterManager()
+{
+	if (this->singleton == this)
+		this->singleton = nullptr;
 }

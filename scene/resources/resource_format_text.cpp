@@ -2406,3 +2406,8 @@ ResourceFormatSaverText *ResourceFormatSaverText::singleton = nullptr;
 ResourceFormatSaverText::ResourceFormatSaverText() {
 	singleton = this;
 }
+
+ResourceFormatSaverText::~ResourceFormatSaverText() {
+	if (this->singleton == this)
+		singleton = nullptr;
+}

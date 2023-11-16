@@ -1461,4 +1461,6 @@ SceneImportSettings::SceneImportSettings() {
 
 SceneImportSettings::~SceneImportSettings() {
 	memdelete(scene_import_settings_data);
+	if (this->singleton == this)
+		this->singleton = nullptr;
 }

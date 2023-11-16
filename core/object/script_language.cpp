@@ -426,6 +426,11 @@ ScriptCodeCompletionCache *ScriptCodeCompletionCache::singleton = nullptr;
 ScriptCodeCompletionCache::ScriptCodeCompletionCache() {
 	singleton = this;
 }
+ScriptCodeCompletionCache::~ScriptCodeCompletionCache() {
+	if (this->singleton == this)
+		singleton = nullptr;
+}
+
 
 void ScriptLanguage::get_core_type_words(List<String> *p_core_type_words) const {
 	p_core_type_words->push_back("String");

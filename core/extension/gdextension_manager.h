@@ -71,6 +71,7 @@ public:
 	void load_extensions();
 
 	GDExtensionManager();
+	~GDExtensionManager();
 };
 
 VARIANT_ENUM_CAST(GDExtensionManager::LoadStatus)

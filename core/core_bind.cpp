@@ -1852,6 +1852,11 @@ EngineDebugger::~EngineDebugger() {
 		::EngineDebugger::unregister_message_capture(E.key);
 	}
 	captures.clear();
+	
+	if (this->singleton == this)
+		this->singleton == nullptr;
+
+
 }
 
 EngineDebugger *EngineDebugger::singleton = nullptr;

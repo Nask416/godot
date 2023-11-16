@@ -22,7 +22,7 @@ void NasK::GlobalPluginSettings::_bind_methods()
 
 String NasK::GlobalPluginSettings::get_global_plugin_dir()
 {
-	return this->plugin_folder;
+	return GlobalPluginSettings::plugin_folder;
 }
 
 
@@ -197,11 +197,12 @@ void NasK::GlobalPluginSettings::update_plugins()
 NasK::GlobalPluginSettings::GlobalPluginSettings()
 {
 
-	NasK::GlobalPluginSettings::singleton = this;
+	//NasK::GlobalPluginSettings::singleton = this;
 
 	String exe_file = *OS::get_singleton()->get_executable_path().rsplit("/").end().operator--();
 	
-	this->plugin_folder = OS::get_singleton()->get_executable_path().replace(exe_file,"") + this->PLUGIN_FOLDER_NAME;
+	if(!this->init_plugin_folder)
+		this->plugin_folder = OS::get_singleton()->get_executable_path().replace(exe_file,"") + this->PLUGIN_FOLDER_NAME;
 
 
 	HBoxContainer *title_hb = memnew(HBoxContainer);

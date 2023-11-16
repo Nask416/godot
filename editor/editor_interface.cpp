@@ -1,4 +1,4 @@
-/**************************************************************************/
+﻿/**************************************************************************/
 /*  editor_interface.cpp                                                  */
 /**************************************************************************/
 /*                         This file is part of:                          */
@@ -464,4 +464,10 @@ void EditorInterface::free() {
 EditorInterface::EditorInterface() {
 	ERR_FAIL_COND(singleton != nullptr);
 	singleton = this;
+}
+
+EditorInterface::~EditorInterface()
+{
+	if (this->singleton == this)
+		this->singleton = nullptr;
 }

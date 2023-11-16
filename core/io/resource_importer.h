@@ -94,6 +94,7 @@ public:
 
 	String get_import_base_path(const String &p_for_file) const;
 	ResourceFormatImporter();
+	~ResourceFormatImporter();
 };
 
 class ResourceImporter : public RefCounted {

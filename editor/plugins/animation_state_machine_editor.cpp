@@ -1808,6 +1808,13 @@ AnimationNodeStateMachineEditor::AnimationNodeStateMachineEditor() {
 	error_time = 0;
 }
 
+
+AnimationNodeStateMachineEditor::~AnimationNodeStateMachineEditor()
+{
+	if (this->singleton == this)
+		this->singleton = nullptr;
+}
+
 void EditorAnimationMultiTransitionEdit::add_transition(const StringName &p_from, const StringName &p_to, Ref<AnimationNodeStateMachineTransition> p_transition) {
 	Transition tr;
 	tr.from = p_from;

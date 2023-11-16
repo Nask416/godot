@@ -1,4 +1,4 @@
-/**************************************************************************/
+﻿/**************************************************************************/
 /*  editor_import_blend_runner.cpp                                        */
 /**************************************************************************/
 /*                         This file is part of:                          */
@@ -320,6 +320,12 @@ EditorImportBlendRunner::EditorImportBlendRunner() {
 	kill_timer->connect("timeout", callable_mp(this, &EditorImportBlendRunner::_kill_blender));
 
 	EditorFileSystem::get_singleton()->connect("resources_reimported", callable_mp(this, &EditorImportBlendRunner::_resources_reimported));
+}
+
+EditorImportBlendRunner::~EditorImportBlendRunner()
+{
+	if (this->singleton == this)
+		this->singleton = nullptr;
 }
 
 #endif // TOOLS_ENABLED

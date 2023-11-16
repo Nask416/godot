@@ -170,3 +170,9 @@ GDExtensionManager::GDExtensionManager() {
 	ERR_FAIL_COND(singleton != nullptr);
 	singleton = this;
 }
+
+GDExtensionManager::~GDExtensionManager()
+{
+	if (this->singleton == this)
+		this->singleton = nullptr;
+}

@@ -159,7 +159,7 @@ public:
 	int32_t get_gpu_index() const;
 
 	Engine();
-	virtual ~Engine() {}
+	virtual ~Engine();
 };
 
 #endif // ENGINE_H

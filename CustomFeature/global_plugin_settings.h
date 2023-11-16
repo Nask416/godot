@@ -18,7 +18,7 @@ namespace NasK
 	private:
 		static constexpr char PLUGIN_FOLDER_NAME[] = u8"global_addons/addons";
 
-		inline static GlobalPluginSettings *singleton;
+		//inline static GlobalPluginSettings *singleton;
 
 		enum {
 			BUTTON_PLUGIN_EDIT
@@ -32,7 +32,8 @@ namespace NasK
 
 		static Vector<String> _get_plugins(const String &p_dir);
 
-		String plugin_folder;
+		inline static String plugin_folder;
+		inline static bool init_plugin_folder = false;
 
 
 	protected:
@@ -44,9 +45,9 @@ namespace NasK
 	
 		void update_plugins();
 
-		String get_global_plugin_dir();
+		static String get_global_plugin_dir();
 
-		inline static GlobalPluginSettings *get_singleton() { return GlobalPluginSettings::singleton; }
+		//inline static GlobalPluginSettings *get_singleton() { return GlobalPluginSettings::singleton; }
 
 	};
 }

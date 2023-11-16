@@ -186,6 +186,7 @@ public:
 	virtual void get_recognized_extensions(const Ref<Resource> &p_resource, List<String> *p_extensions) const;
 
 	ResourceFormatSaverBinary();
+	~ResourceFormatSaverBinary();
 };
 
 #endif // RESOURCE_FORMAT_BINARY_H

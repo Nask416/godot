@@ -251,3 +251,9 @@ ProgressDialog::ProgressDialog() {
 	cancel_hb->add_spacer();
 	cancel->connect("pressed", callable_mp(this, &ProgressDialog::_cancel_pressed));
 }
+
+ProgressDialog::~ProgressDialog()
+{
+	if (this->singleton == this)
+		this->singleton = nullptr;
+}

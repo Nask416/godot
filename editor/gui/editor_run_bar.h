@@ -110,6 +110,7 @@ public:
 	Button *get_pause_button() { return pause_button; }
 
 	EditorRunBar();
+	~EditorRunBar();
 };
 
 #endif // EDITOR_RUN_BAR_H

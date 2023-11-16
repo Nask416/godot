@@ -1034,3 +1034,9 @@ EditorFeatureProfileManager::EditorFeatureProfileManager() {
 
 	singleton = this;
 }
+
+EditorFeatureProfileManager::~EditorFeatureProfileManager()
+{
+	if (this->singleton == this)
+		this->singleton = nullptr;
+}

@@ -2441,3 +2441,9 @@ ResourceFormatSaverBinary *ResourceFormatSaverBinary::singleton = nullptr;
 ResourceFormatSaverBinary::ResourceFormatSaverBinary() {
 	singleton = this;
 }
+
+ResourceFormatSaverBinary::~ResourceFormatSaverBinary() {
+	if (this->singleton == this)
+		this->singleton = nullptr;
+
+}

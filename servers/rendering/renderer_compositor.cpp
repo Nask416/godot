@@ -1,4 +1,4 @@
-/**************************************************************************/
+﻿/**************************************************************************/
 /*  renderer_compositor.cpp                                               */
 /**************************************************************************/
 /*                         This file is part of:                          */
@@ -56,6 +56,12 @@ RendererCompositor::RendererCompositor() {
 	} else {
 		xr_enabled = XRServer::get_xr_mode() == XRServer::XRMODE_ON;
 	}
+}
+
+RendererCompositor::~RendererCompositor()
+{
+	if (this->singleton == this)
+		this->singleton = nullptr;
 }
 
 RendererCanvasRender *RendererCanvasRender::singleton = nullptr;

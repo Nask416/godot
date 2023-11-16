@@ -599,4 +599,7 @@ WorkerThreadPool::WorkerThreadPool() {
 
 WorkerThreadPool::~WorkerThreadPool() {
 	finish();
+
+	if (this->singleton == this)
+		this->singleton = nullptr;
 }

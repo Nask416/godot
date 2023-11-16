@@ -91,6 +91,14 @@ EditorDebuggerNode::EditorDebuggerNode() {
 	EditorRunBar::get_singleton()->get_pause_button()->connect("pressed", callable_mp(this, &EditorDebuggerNode::_paused));
 }
 
+EditorDebuggerNode::~EditorDebuggerNode()
+{
+	if (this->singleton  == this)
+		this->singleton = nullptr;
+}
+
+
+
 ScriptEditorDebugger *EditorDebuggerNode::_add_debugger() {
 	ScriptEditorDebugger *node = memnew(ScriptEditorDebugger);
 

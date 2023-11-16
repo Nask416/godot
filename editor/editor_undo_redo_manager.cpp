@@ -542,4 +542,7 @@ EditorUndoRedoManager::~EditorUndoRedoManager() {
 	for (const KeyValue<int, History> &E : history_map) {
 		discard_history(E.key, false);
 	}
+
+	if (this->singleton == this)
+		this->singleton = nullptr;
 }

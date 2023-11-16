@@ -651,3 +651,9 @@ AudioStreamImportSettings::AudioStreamImportSettings() {
 
 	singleton = this;
 }
+
+AudioStreamImportSettings::~AudioStreamImportSettings()
+{
+	if (this->singleton == this)
+		this->singleton = nullptr;
+}

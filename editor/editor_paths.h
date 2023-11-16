@@ -80,6 +80,7 @@ public:
 	static void free();
 
 	EditorPaths();
+	~EditorPaths();
 };
 
 #endif // EDITOR_PATHS_H

@@ -1,4 +1,4 @@
-/**************************************************************************/
+﻿/**************************************************************************/
 /*  copy_effects.cpp                                                      */
 /**************************************************************************/
 /*                         This file is part of:                          */
@@ -112,6 +112,9 @@ CopyEffects::~CopyEffects() {
 	glDeleteBuffers(1, &quad);
 	glDeleteVertexArrays(1, &quad_array);
 	copy.shader.version_free(copy.shader_version);
+
+	if (this->singleton == this)
+		this->singleton = nullptr;
 }
 
 void CopyEffects::copy_to_rect(const Rect2 &p_rect) {

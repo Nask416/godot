@@ -129,6 +129,7 @@ public:
 	static Performance *get_singleton() { return singleton; }
 
 	Performance();
+	~Performance();
 };
 
 VARIANT_ENUM_CAST(Performance::Monitor);

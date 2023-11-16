@@ -1,4 +1,4 @@
-/**************************************************************************/
+﻿/**************************************************************************/
 /*  control_editor_plugin.cpp                                             */
 /**************************************************************************/
 /*                         This file is part of:                          */
@@ -1034,6 +1034,12 @@ ControlEditorToolbar::ControlEditorToolbar() {
 	editor_selection->connect("selection_changed", callable_mp(this, &ControlEditorToolbar::_selection_changed));
 
 	singleton = this;
+}
+
+ControlEditorToolbar::~ControlEditorToolbar()
+{
+	if (this->singleton == this)
+		this->singleton = nullptr;
 }
 
 ControlEditorToolbar *ControlEditorToolbar::singleton = nullptr;

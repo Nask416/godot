@@ -106,6 +106,7 @@ public:
 	void edit(Ref<TileSet> p_tile_set);
 
 	TileSetEditor();
+	~TileSetEditor();
 };
 
 #endif // TILE_SET_EDITOR_H

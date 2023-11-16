@@ -185,6 +185,7 @@ public:
 	void load_translations();
 
 	TranslationServer();
+	~TranslationServer();
 };
 
 #endif // TRANSLATION_H

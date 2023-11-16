@@ -796,4 +796,6 @@ ResourceImporterTexture::ResourceImporterTexture() {
 }
 
 ResourceImporterTexture::~ResourceImporterTexture() {
+	if (this->singleton == this)
+		this->singleton = nullptr;
 }

@@ -458,4 +458,7 @@ TilesEditorPlugin::~TilesEditorPlugin() {
 		}
 		pattern_preview_thread.wait_to_finish();
 	}
+
+	if (this->singleton == this)
+		this->singleton = nullptr;
 }

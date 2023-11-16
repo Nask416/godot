@@ -54,7 +54,7 @@ public:
 	static void receive_input_packet(uint64_t timestamp, uint8_t *data, uint32_t length);
 
 	MIDIDriver();
-	virtual ~MIDIDriver() {}
+	virtual ~MIDIDriver();
 };
 
 #endif // MIDI_DRIVER_H

@@ -1937,6 +1937,9 @@ AnimationPlayerEditor::~AnimationPlayerEditor() {
 	_free_onion_layers();
 	RS::get_singleton()->free(onion.capture.canvas);
 	RS::get_singleton()->free(onion.capture.canvas_item);
+	
+	if (this->singleton == this)
+		this->singleton = nullptr;
 }
 
 void AnimationPlayerEditorPlugin::_notification(int p_what) {

@@ -1304,6 +1304,8 @@ public:
 	static RenderingDevice *get_singleton();
 	RenderingDevice();
 
+	~RenderingDevice();
+
 protected:
 	static const char *shader_stage_names[RenderingDevice::SHADER_STAGE_MAX];
 

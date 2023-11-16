@@ -61,4 +61,7 @@ FramebufferCacheRD::~FramebufferCacheRD() {
 	if (cache_instances_used > 0) {
 		ERR_PRINT("At exit: " + itos(cache_instances_used) + " framebuffer cache instance(s) still in use.");
 	}
+
+	if (this->singleton == this)
+		this->singleton = nullptr;
 }

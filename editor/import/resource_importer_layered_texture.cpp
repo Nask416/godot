@@ -1,4 +1,4 @@
-/**************************************************************************/
+﻿/**************************************************************************/
 /*  resource_importer_layered_texture.cpp                                 */
 /**************************************************************************/
 /*                         This file is part of:                          */
@@ -479,6 +479,8 @@ ResourceImporterLayeredTexture::ResourceImporterLayeredTexture() {
 }
 
 ResourceImporterLayeredTexture::~ResourceImporterLayeredTexture() {
+	if(this->singleton == this)
+		this->singleton = nullptr;
 }
 
 void ResourceImporterLayeredTexture::_check_compress_ctex(const String &p_source_file, Ref<LayeredTextureImport> r_texture_import) {

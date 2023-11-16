@@ -1034,4 +1034,6 @@ DebugAdapterProtocol::DebugAdapterProtocol() {
 
 DebugAdapterProtocol::~DebugAdapterProtocol() {
 	memdelete(parser);
+	if (this->singleton == this)
+		this->singleton = nullptr;
 }

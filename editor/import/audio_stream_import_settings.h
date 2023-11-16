@@ -112,6 +112,7 @@ public:
 	static AudioStreamImportSettings *get_singleton() { return singleton; }
 
 	AudioStreamImportSettings();
+	~AudioStreamImportSettings();
 };
 
 #endif // AUDIO_STREAM_IMPORT_SETTINGS_H

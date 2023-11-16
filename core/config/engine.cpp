@@ -317,6 +317,11 @@ Engine::Engine() {
 	singleton = this;
 }
 
+Engine::~Engine() {
+	if (this->singleton == this)
+		singleton = nullptr;
+}
+
 Engine::Singleton::Singleton(const StringName &p_name, Object *p_ptr, const StringName &p_class_name) :
 		name(p_name),
 		ptr(p_ptr),

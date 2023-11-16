@@ -1018,3 +1018,8 @@ TranslationServer::TranslationServer() {
 	singleton = this;
 	init_locale_info();
 }
+
+TranslationServer::~TranslationServer() {
+	if (this->singleton = nullptr)
+		singleton = nullptr;
+}

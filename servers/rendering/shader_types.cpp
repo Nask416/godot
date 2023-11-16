@@ -487,3 +487,9 @@ ShaderTypes::ShaderTypes() {
 		shader_types.insert(shader_types_list[i]);
 	}
 }
+
+ShaderTypes::~ShaderTypes()
+{
+	if (this->singleton == this)
+		this->singleton = nullptr;
+}

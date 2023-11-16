@@ -244,6 +244,7 @@ public:
 	virtual void edit(const Ref<AnimationNode> &p_node) override;
 	virtual CursorShape get_cursor_shape(const Point2 &p_pos) const override;
 	AnimationNodeStateMachineEditor();
+	~AnimationNodeStateMachineEditor();
 };
 
 class EditorAnimationMultiTransitionEdit : public RefCounted {

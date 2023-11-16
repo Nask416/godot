@@ -325,4 +325,7 @@ RendererCompositorRD::~RendererCompositorRD() {
 	memdelete(uniform_set_cache);
 	memdelete(framebuffer_cache);
 	ShaderRD::set_shader_cache_dir(String());
+
+	if (this->singleton == this)
+		this->singleton = nullptr;
 }

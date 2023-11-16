@@ -62,6 +62,7 @@ public:
 	Error do_import(const Dictionary &p_options);
 
 	EditorImportBlendRunner();
+	~EditorImportBlendRunner();
 };
 
 #endif // TOOLS_ENABLED

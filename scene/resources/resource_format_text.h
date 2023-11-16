@@ -153,6 +153,11 @@ public:
 	static Error convert_file_to_binary(const String &p_src_path, const String &p_dst_path);
 
 	ResourceFormatLoaderText() { singleton = this; }
+
+	inline ~ResourceFormatLoaderText() {
+		if (this->singleton == this)
+			this->singleton = nullptr;
+	}
 };
 
 class ResourceFormatSaverTextInstance {
@@ -204,6 +209,7 @@ public:
 	virtual void get_recognized_extensions(const Ref<Resource> &p_resource, List<String> *p_extensions) const;
 
 	ResourceFormatSaverText();
+	~ResourceFormatSaverText();
 };
 
 #endif // RESOURCE_FORMAT_TEXT_H

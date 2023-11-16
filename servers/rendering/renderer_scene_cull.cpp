@@ -4176,4 +4176,7 @@ RendererSceneCull::~RendererSceneCull() {
 	if (dummy_occlusion_culling) {
 		memdelete(dummy_occlusion_culling);
 	}
+
+	if (this->singleton == this)
+		this->singleton = nullptr;
 }

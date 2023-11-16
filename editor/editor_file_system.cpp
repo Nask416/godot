@@ -2601,4 +2601,7 @@ EditorFileSystem::EditorFileSystem() {
 
 EditorFileSystem::~EditorFileSystem() {
 	ResourceSaver::set_get_resource_id_for_path(nullptr);
+	
+	if (this->singleton == this)
+		this->singleton = nullptr;
 }

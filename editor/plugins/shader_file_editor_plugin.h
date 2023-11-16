@@ -69,6 +69,7 @@ public:
 	void edit(const Ref<RDShaderFile> &p_shader);
 
 	ShaderFileEditor();
+	~ShaderFileEditor();
 };
 
 class ShaderFileEditorPlugin : public EditorPlugin {

@@ -164,6 +164,11 @@ private:
 
 public:
 	static LiveEditor *get_singleton();
+
+	inline ~LiveEditor() {
+		if (this->singleton == this)
+			this->singleton = nullptr;
+	};
 };
 #endif
 

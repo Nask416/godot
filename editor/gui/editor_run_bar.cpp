@@ -442,3 +442,9 @@ EditorRunBar::EditorRunBar() {
 	add_child(quick_run);
 	quick_run->connect("quick_open", callable_mp(this, &EditorRunBar::_quick_run_selected));
 }
+
+EditorRunBar::~EditorRunBar()
+{
+	if (this->singleton == this)
+		this->singleton = nullptr;
+}

@@ -156,6 +156,7 @@ public:
 	void update_graph();
 
 	AnimationNodeBlendTreeEditor();
+	~AnimationNodeBlendTreeEditor();
 };
 
 #endif // ANIMATION_BLEND_TREE_EDITOR_PLUGIN_H

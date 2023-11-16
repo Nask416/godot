@@ -53,7 +53,7 @@ String DirAccess::_get_root_path() const {
 //NasK 2023/11/10
 #if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
 		case ACCESS_GLOBAL_PLUGIN:
-			return NasK::GlobalPluginSettings::get_singleton()->get_global_plugin_dir();
+			return NasK::GlobalPluginSettings::get_global_plugin_dir();
 #endif
 		default:
 			return "";
@@ -238,7 +238,7 @@ String DirAccess::fix_path(String p_path) const {
 #if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
 		case ACCESS_GLOBAL_PLUGIN: {
 			if (p_path.begins_with("gpd://")) {
-				String data_dir = NasK::GlobalPluginSettings::get_singleton()->get_global_plugin_dir();
+				String data_dir = NasK::GlobalPluginSettings::get_global_plugin_dir();
 				if (!data_dir.is_empty()) {
 					return p_path.replace_first("gpd:/", data_dir);
 				}

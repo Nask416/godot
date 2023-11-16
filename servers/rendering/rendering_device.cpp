@@ -1,4 +1,4 @@
-/**************************************************************************/
+﻿/**************************************************************************/
 /*  rendering_device.cpp                                                  */
 /**************************************************************************/
 /*                         This file is part of:                          */
@@ -1335,3 +1335,10 @@ RenderingDevice::RenderingDevice() {
 		singleton = this;
 	}
 }
+
+RenderingDevice::~RenderingDevice() {
+	if (this->singleton == this)
+		this->singleton = nullptr;
+
+}
+

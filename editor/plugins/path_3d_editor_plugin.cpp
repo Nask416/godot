@@ -1,4 +1,4 @@
-/**************************************************************************/
+﻿/**************************************************************************/
 /*  path_3d_editor_plugin.cpp                                             */
 /**************************************************************************/
 /*                         This file is part of:                          */
@@ -680,6 +680,9 @@ Path3DEditorPlugin::Path3DEditorPlugin() {
 }
 
 Path3DEditorPlugin::~Path3DEditorPlugin() {
+
+	if(this->singleton == this)
+		this->singleton = nullptr;
 }
 
 Ref<EditorNode3DGizmo> Path3DGizmoPlugin::create_gizmo(Node3D *p_spatial) {

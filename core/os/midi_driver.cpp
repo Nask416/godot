@@ -122,3 +122,8 @@ PackedStringArray MIDIDriver::get_connected_inputs() {
 MIDIDriver::MIDIDriver() {
 	set_singleton();
 }
+
+MIDIDriver::~MIDIDriver() {
+	if (this->singleton == this)
+		this->singleton == nullptr;
+}

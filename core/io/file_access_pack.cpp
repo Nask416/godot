@@ -123,6 +123,9 @@ PackedData::~PackedData() {
 		memdelete(sources[i]);
 	}
 	_free_packed_dirs(root);
+
+	if (this->singleton == this)
+		this->singleton = nullptr;
 }
 
 //////////////////////////////////////////////////////////////////

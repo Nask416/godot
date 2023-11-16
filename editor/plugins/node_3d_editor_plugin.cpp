@@ -8713,6 +8713,9 @@ Node3DEditor::~Node3DEditor() {
 	if (preview_env_dangling && preview_environment) {
 		memdelete(preview_environment);
 	}
+
+	if (this->singleton == this)
+		this->singleton = nullptr;
 }
 
 void Node3DEditorPlugin::make_visible(bool p_visible) {

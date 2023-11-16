@@ -262,3 +262,9 @@ EditorPaths::EditorPaths() {
 		}
 	}
 }
+
+EditorPaths::~EditorPaths()
+{
+	if (this->singleton == this)
+		this->singleton = nullptr;
+}

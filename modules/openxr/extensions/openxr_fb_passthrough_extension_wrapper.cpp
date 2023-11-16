@@ -48,6 +48,9 @@ OpenXRFbPassthroughExtensionWrapper::OpenXRFbPassthroughExtensionWrapper() {
 
 OpenXRFbPassthroughExtensionWrapper::~OpenXRFbPassthroughExtensionWrapper() {
 	cleanup();
+
+	if (this->singleton == this)
+		this->singleton = nullptr;
 }
 
 HashMap<String, bool *> OpenXRFbPassthroughExtensionWrapper::get_requested_extensions() {

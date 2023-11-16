@@ -294,7 +294,7 @@ String OS::get_resource_dir() const {
 //NasK 2023/11/10 gdp://
 #if defined(CUSTOM_FEATURE) && defined(TOOLS_ENABLED)
 String OS::get_global_plugin_dir() const {
-	return NasK::GlobalPluginSettings::get_singleton()->get_global_plugin_dir();
+	return NasK::GlobalPluginSettings::get_global_plugin_dir();
 }
 #endif
 

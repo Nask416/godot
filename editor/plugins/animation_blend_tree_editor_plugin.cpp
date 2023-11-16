@@ -1149,3 +1149,9 @@ AnimationNodeBlendTreeEditor::AnimationNodeBlendTreeEditor() {
 	open_file->set_file_mode(EditorFileDialog::FILE_MODE_OPEN_FILE);
 	open_file->connect("file_selected", callable_mp(this, &AnimationNodeBlendTreeEditor::_file_opened));
 }
+
+AnimationNodeBlendTreeEditor::~AnimationNodeBlendTreeEditor()
+{
+	if (this->singleton == this)
+		this->singleton = nullptr;
+}

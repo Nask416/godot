@@ -97,6 +97,7 @@ public:
 	void end_task(const String &p_task);
 
 	ProgressDialog();
+	~ProgressDialog();
 };
 
 #endif // PROGRESS_DIALOG_H

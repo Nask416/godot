@@ -1,4 +1,4 @@
-/**************************************************************************/
+﻿/**************************************************************************/
 /*  rasterizer_gles3.cpp                                                  */
 /**************************************************************************/
 /*                         This file is part of:                          */
@@ -303,6 +303,8 @@ RasterizerGLES3::RasterizerGLES3() {
 }
 
 RasterizerGLES3::~RasterizerGLES3() {
+	if (this->singleton == this)
+		this->singleton = nullptr;
 }
 
 void RasterizerGLES3::prepare_for_blitting_render_targets() {

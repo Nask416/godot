@@ -149,6 +149,7 @@ public:
 	static void free();
 
 	EditorInterface();
+	~EditorInterface();
 };
 
 #endif // EDITOR_INTERFACE_H

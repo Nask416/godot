@@ -472,6 +472,11 @@ ResourceFormatImporter::ResourceFormatImporter() {
 	singleton = this;
 }
 
+ResourceFormatImporter::~ResourceFormatImporter() {
+	if (this->singleton == this)
+		singleton = nullptr;
+}
+
 void ResourceImporter::_bind_methods() {
 	BIND_ENUM_CONSTANT(IMPORT_ORDER_DEFAULT);
 	BIND_ENUM_CONSTANT(IMPORT_ORDER_SCENE);

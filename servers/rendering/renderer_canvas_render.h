@@ -518,7 +518,10 @@ public:
 	virtual void update() = 0;
 
 	RendererCanvasRender() { singleton = this; }
-	virtual ~RendererCanvasRender() {}
+	virtual ~RendererCanvasRender() {
+		if (this->singleton == this)
+			this->singleton = nullptr;
+	}
 };
 
 #endif // RENDERER_CANVAS_RENDER_H

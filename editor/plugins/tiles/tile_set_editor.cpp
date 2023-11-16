@@ -868,3 +868,9 @@ TileSetEditor::TileSetEditor() {
 	EditorNode::get_singleton()->get_editor_data().add_move_array_element_function(SNAME("TileSet"), callable_mp(this, &TileSetEditor::_move_tile_set_array_element));
 	EditorNode::get_singleton()->get_editor_data().add_undo_redo_inspector_hook_callback(callable_mp(this, &TileSetEditor::_undo_redo_inspector_callback));
 }
+
+TileSetEditor::~TileSetEditor()
+{
+	if (this->singleton == this)
+		this->singleton = nullptr;
+}

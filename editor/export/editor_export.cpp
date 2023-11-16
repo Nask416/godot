@@ -411,4 +411,6 @@ EditorExport::EditorExport() {
 }
 
 EditorExport::~EditorExport() {
+	if(this->singleton == this)
+		this->singleton = nullptr;
 }

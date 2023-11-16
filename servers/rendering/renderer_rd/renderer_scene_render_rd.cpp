@@ -1346,4 +1346,7 @@ RendererSceneRenderRD::~RendererSceneRenderRD() {
 
 	RSG::light_storage->directional_shadow_atlas_set_size(0);
 	cull_argument.reset(); //avoid exit error
+
+	if (this->singleton == this)
+		this->singleton = nullptr;
 }

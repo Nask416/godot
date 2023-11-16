@@ -351,4 +351,7 @@ IP::~IP() {
 	resolver->thread.wait_to_finish();
 
 	memdelete(resolver);
+
+	if (this->singleton == this)
+		this->singleton = nullptr;
 }

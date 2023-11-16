@@ -1850,7 +1850,7 @@ SceneTree::~SceneTree() {
 
 	memdelete(process_group_call_queue_allocator);
 
-	if (singleton == this) {
+	if (singleton == this) 
 		singleton = nullptr;
-	}
+
 }

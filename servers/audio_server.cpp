@@ -1764,7 +1764,8 @@ AudioServer::AudioServer() {
 }
 
 AudioServer::~AudioServer() {
-	singleton = nullptr;
+	if (this->singleton == this)
+		singleton = nullptr;
 }
 
 /////////////////////////////////

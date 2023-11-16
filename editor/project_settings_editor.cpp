@@ -1,4 +1,4 @@
-/**************************************************************************/
+﻿/**************************************************************************/
 /*  project_settings_editor.cpp                                           */
 /**************************************************************************/
 /*                         This file is part of:                          */
@@ -759,4 +759,10 @@ ProjectSettingsEditor::ProjectSettingsEditor(EditorData *p_data) {
 	import_defaults_editor->connect("project_settings_changed", callable_mp(this, &ProjectSettingsEditor::queue_save));
 
 	MovieWriter::set_extensions_hint(); // ensure extensions are properly displayed.
+}
+
+ProjectSettingsEditor::~ProjectSettingsEditor()
+{
+	if (this->singleton == this)
+		this->singleton = nullptr;
 }

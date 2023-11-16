@@ -85,6 +85,11 @@ public:
 	ResourceUID::ID get_resource_uid(const String &p_path);
 
 	ResourceLoader() { singleton = this; }
+	inline ~ResourceLoader() {
+		if (this->singleton == nullptr)
+			this->singleton = nullptr; 
+	}
+
 };
 
 class ResourceSaver : public Object {
@@ -114,6 +119,12 @@ public:
 	void remove_resource_format_saver(Ref<ResourceFormatSaver> p_format_saver);
 
 	ResourceSaver() { singleton = this; }
+
+	inline ~ResourceSaver()
+	{
+		if (this->singleton == this)
+			this->singleton = nullptr;
+	}
 };
 
 class OS : public Object {
@@ -248,6 +259,11 @@ public:
 	static OS *get_singleton() { return singleton; }
 
 	OS() { singleton = this; }
+	inline ~OS() {
+		if (this->singleton == this)
+			this->singleton = nullptr;
+	
+	}
 };
 
 class Geometry2D : public Object {
@@ -312,6 +328,11 @@ public:
 	Dictionary make_atlas(const Vector<Size2> &p_rects);
 
 	Geometry2D() { singleton = this; }
+
+	inline ~Geometry2D(){
+		if (this->singleton == this)
+			this->singleton = nullptr;
+	}
 };
 
 class Geometry3D : public Object {
@@ -340,6 +361,11 @@ public:
 	Vector<Vector3> clip_polygon(const Vector<Vector3> &p_points, const Plane &p_plane);
 
 	Geometry3D() { singleton = this; }
+
+	inline ~Geometry3D() {
+		if(this->singleton==this)
+			this->singleton = nullptr;
+	}
 };
 
 class Marshalls : public Object {
@@ -529,6 +555,13 @@ public:
 	bool is_printing_error_messages() const;
 
 	Engine() { singleton = this; }
+
+	inline ~Engine()
+	{
+		if (this->singleton == this)
+			this->singleton = nullptr;
+	}
+
 };
 
 class EngineDebugger : public Object {

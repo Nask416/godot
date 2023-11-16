@@ -2596,6 +2596,14 @@ ResourceImporterScene::ResourceImporterScene(bool p_animation_import) {
 	animation_importer = p_animation_import;
 }
 
+ResourceImporterScene::~ResourceImporterScene() {
+	if (this->animation_singleton == this)
+		this->animation_singleton = nullptr;
+
+	if (this->scene_singleton == this)
+		this->scene_singleton = nullptr;
+}
+
 void ResourceImporterScene::add_importer(Ref<EditorSceneFormatImporter> p_importer, bool p_first_priority) {
 	ERR_FAIL_COND(p_importer.is_null());
 	if (p_first_priority) {
