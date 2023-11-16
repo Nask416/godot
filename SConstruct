@@ -272,8 +272,6 @@ opts.Update(env_base)
 opts.Add(BoolVariable("CustomFeatureEnable", "Custom feature enable.", False))
 opts.Add(BoolVariable("nkAllocatorEnable", "nkAllocator enable.", False))
 
-
-
 # Platform selection: validate input, and add options.
 
 selected_platform = ""
