@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+﻿#!/usr/bin/env python
 
 EnsureSConsVersion(3, 0, 0)
 EnsurePythonVersion(3, 6)
@@ -268,6 +268,8 @@ opts.Add("LINKFLAGS", "Custom flags for the linker")
 opts.Update(env_base)
 
 
+opts.Add(BoolVariable("debug_enebled", "define DEBUG_ENABLED", True))
+
 #追加機能有効オプション
 opts.Add(BoolVariable("CustomFeatureEnable", "Custom feature enable.", False))
 opts.Add(BoolVariable("nkAllocatorEnable", "nkAllocator enable.", False))
@@ -415,7 +417,8 @@ env_base.platform_apis = platform_apis
 
 env_base.editor_build = env_base["target"] == "editor_debug" or env_base["target"] == "editor_release"
 env_base.dev_build = env_base["dev_build"]
-env_base.debug_features = env_base["target"] in ["editor_debug", "template_debug","editor_release"]
+env_base.debug_features = env_base["debug_enebled"]
+#env_base.debug_features = env_base["target"] in ["editor_debug", "template_debug"]
 
 if env_base.dev_build:
     opt_level = "none"
@@ -455,10 +458,6 @@ if env_base["CustomFeatureEnable"]:
 if env_base["nkAllocatorEnable"]:
     env_base.Append(CPPDEFINES=["NK_ALLOC_ENABLE"])
     env_base.Append(LINKFLAGS=["nkAllocator.lib"])
-
-
-
-
 
 # SCons speed optimization controlled by the `fast_unsafe` option, which provide
 # more than 10 s speed up for incremental rebuilds.
@@ -593,6 +592,7 @@ if selected_platform in platform_list:
     # Set optimize and debug_symbols flags.
     # "custom" means do nothing and let users set their own optimization flags.
     # Needs to happen after configure to have `env.msvc` defined.
+
     if env.msvc:
         if env["debug_symbols"]:
             env.Append(CCFLAGS=["/Zi", "/FS"])
@@ -602,7 +602,7 @@ if selected_platform in platform_list:
             env.Append(CCFLAGS=["/O2"])
             env.Append(CCFLAGS=["/Oi"])
             env.Append(CCFLAGS=["/Ot"])
-            env.Append(CCFLAGS=["/Ob2"])
+            env.Append(CCFLAGS=["/Ob1"])
             env.Append(LINKFLAGS=["/OPT:REF"])
         elif env["optimize"] == "speed_trace":
             env.Append(CCFLAGS=["/O2"])
@@ -986,7 +986,7 @@ if selected_platform in platform_list:
     SConscript("scene/SCsub")
     if env.editor_build:
         SConscript("editor/SCsub")
-    if env.editor_build and env_base["CustomFeatureEnable"]:
+    if env_base["CustomFeatureEnable"]:
         SConscript("CustomFeature/SCsub")
 
     SConscript("drivers/SCsub")
