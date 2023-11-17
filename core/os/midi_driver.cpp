@@ -125,5 +125,5 @@ MIDIDriver::MIDIDriver() {
 
 MIDIDriver::~MIDIDriver() {
 	if (this->singleton == this)
-		this->singleton == nullptr;
+		this->singleton = nullptr;
 }

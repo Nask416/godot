@@ -1854,7 +1854,7 @@ EngineDebugger::~EngineDebugger() {
 	captures.clear();
 	
 	if (this->singleton == this)
-		this->singleton == nullptr;
+		this->singleton = nullptr;
 
 
 }
