@@ -4,6 +4,10 @@
     <LocalDebuggerCommandArguments>--path C:/Users/notebook/Documents/Godot/Plugin_test --editor</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='editor_release_vulkan[mono]|x64'">
+    <LocalDebuggerCommandArguments>--path C:/Users/notebook/Documents/Godot/Plugin_test --editor</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='editor_debug_openGL[mono]|x64'">
     <LocalDebuggerCommandArguments>--path "C:\Users\notebook\Documents\Godot\Plugin_test" --editor</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
@@ -12,7 +16,7 @@
     <LocalDebuggerCommandArguments>--path "C:\Users\notebook\Documents\Godot\Plugin_test" --editor</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='editor_debug_default|x64'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='editor_debug_default[mono]|x64'">
     <LocalDebuggerCommandArguments>--path "C:\Users\notebook\Documents\Godot\Plugin_test" --editor</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
