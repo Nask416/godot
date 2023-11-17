@@ -1,3 +1,6 @@
+
+#ifdef TOOLS_ENABLED
+
 #include "global_plugin_settings.h"
 #include "../core/os/os.h"
 #include "../servers/display_server.h"
@@ -12,8 +15,6 @@
 #include "../editor/editor_scale.h"
 #include <iostream>
 #include <filesystem>
-
-
 
 void NasK::GlobalPluginSettings::_bind_methods()
 {
@@ -252,3 +253,4 @@ NasK::GlobalPluginSettings::GlobalPluginSettings()
 
 }
 
+#endif // TOOL_ENABLED

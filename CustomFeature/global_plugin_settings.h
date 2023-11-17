@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#ifdef TOOLS_ENABLED
+
 #include<iostream>
 #include "scene/gui/dialogs.h"
 #include "scene/gui/item_list.h"
@@ -52,5 +54,5 @@ namespace NasK
 	};
 }
 
-
+#endif
 

@@ -5,7 +5,10 @@
 
 void register_customfeature_types()
 {
-	GDREGISTER_CLASS(NasK::GlobalPluginSettings);
+#ifdef TOOLS_ENABLED
+GDREGISTER_CLASS(NasK::GlobalPluginSettings);
+#endif
+
 }
 
 void unregister_customfeature_types()
