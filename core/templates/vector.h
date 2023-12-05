@@ -1,4 +1,4 @@
-/**************************************************************************/
+﻿/**************************************************************************/
 /*  vector.h                                                              */
 /**************************************************************************/
 /*                         This file is part of:                          */
@@ -44,6 +44,8 @@
 
 #include <climits>
 #include <initializer_list>
+#include <type_traits>
+
 
 template <class T>
 class VectorWriteProxy {
@@ -64,6 +66,7 @@ public:
 
 private:
 	CowData<T> _cowdata;
+
 
 public:
 	bool push_back(T p_elem);
@@ -177,7 +180,10 @@ public:
 		result.resize(result_size);
 
 		const T *const r = ptr();
-		T *const w = result.ptrw();
+		//T *const w = result.ptrw();
+		//resizeですでにcowしているため生ptrを取得
+		T *w = (T*)result.ptr();
+
 		for (int i = 0; i < result_size; ++i) {
 			w[i] = r[begin + i];
 		}
@@ -282,7 +288,9 @@ public:
 
 		int i = 0;
 		for (const T &element : p_init) {
-			_cowdata.set(i++, element);
+			//_cowdata.set(i++, element);
+			//resizeですでにcow済みのため生ptrにセット
+			*(T*)(this->_cowdata.ptr() + i++) = element;
 		}
 	}
 	_FORCE_INLINE_ Vector(const Vector &p_from) { _cowdata._ref(p_from._cowdata); }
@@ -315,7 +323,10 @@ template <class T>
 bool Vector<T>::push_back(T p_elem) {
 	Error err = resize(size() + 1);
 	ERR_FAIL_COND_V(err, true);
-	set(size() - 1, p_elem);
+	//set(size() - 1, p_elem);
+	
+	//resizeですでにcow済みのため生ptrにセット
+	*(T *)(this->_cowdata.ptr() + (size() - 1)) = p_elem;
 
 	return false;
 }
