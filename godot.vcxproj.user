@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='editor_debug_vulkan[mono]|x64'">
-    <LocalDebuggerCommandArguments>--path C:/Users/notebook/Documents/Godot/Plugin_test --editor</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>--path C:\Users\notebook\Documents\Godot\squash_the_creeps_start --editor</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='editor_release_vulkan[mono]|x64'">
-    <LocalDebuggerCommandArguments>--path C:/Users/notebook/Documents/Godot/Plugin_test --editor</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>--path C:\Users\notebook\Documents\Godot\squash_the_creeps_start --editor</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='editor_debug_openGL[mono]|x64'">
