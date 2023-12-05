@@ -44,7 +44,34 @@
 #endif
 
 
+#define ALIGN_ENABLE
+
+
+//AVXのアライメントサイズに統一
+//AVX2を使うようであれば検討の必要あり
+#if !defined(ALIGN_SIZE) && defined(ALIGN_ENABLE)
+#define ALIGN_SIZE 16
+
+//アラインサイズが8byte以下であればアライメントの必要なし
+#if ALIGN_SIZE <= 8
+#undef ALIGN_ENABLE
+#endif
+
+#endif // !ALINGN_SIZE
+
+
+#ifdef ALIGN_ENABLE
+//ALIGN_SIZEとPAD_ALIGNが等しくなければコンパイルエラーを出す
+static_assert(ALIGN_SIZE == PAD_ALIGN, "ALIGN_SIZE and PAD_ALIGN must be equal.");
+//ALIGN_SIZEが2の累乗数でない場合コンパイルエラーを出す
+static_assert((ALIGN_SIZE & (ALIGN_SIZE - 1)) == 0, "Alignment size must be a power of 2");
+
+#endif // ALIGN_ENABLE
+
+
 class Memory {
+
+
 #ifdef DEBUG_ENABLED
 	static SafeNumeric<uint64_t> mem_usage;
 	static SafeNumeric<uint64_t> max_usage;

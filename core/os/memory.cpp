@@ -41,6 +41,7 @@
 #include <godot_nkalloc.h>
 #endif
 
+
 void *operator new(size_t p_size, const char *p_description) {
 	return Memory::alloc_static(p_size, false);
 }
@@ -77,14 +78,21 @@ void *Memory::alloc_static(size_t p_bytes, bool p_pad_align) {
 	bool prepad = p_pad_align;
 #endif
 
+#ifdef ALIGN_ENABLE
+#ifdef NK_ALLOC_ENABLE
+	void *mem = gd_nk_aligned_malloc(p_bytes + (prepad ? PAD_ALIGN : 0),ALIGN_SIZE);
+#else
+	void *mem = _aligned_malloc(p_bytes + (prepad ? PAD_ALIGN : 0),ALIGN_SIZE);
+#endif // NK_ALLOC_ENABLE
+
+#else
 //Nask 2023/10/20
 #ifdef NK_ALLOC_ENABLE
 	void *mem = gd_nk_malloc(p_bytes + (prepad ? PAD_ALIGN : 0));
-	//void *mem = malloc(p_bytes + (prepad ? PAD_ALIGN : 0));
 #else
 	void *mem = malloc(p_bytes + (prepad ? PAD_ALIGN : 0));
 #endif // NK_ALLOC_ENABLE
-	
+#endif
 
 	ERR_FAIL_COND_V(!mem, nullptr);
 
@@ -133,24 +141,39 @@ void *Memory::realloc_static(void *p_memory, size_t p_bytes, bool p_pad_align) {
 #endif
 
 		if (p_bytes == 0) {
-//Nask 2023/10/20
+#ifdef ALIGN_ENABLE
 #ifdef NK_ALLOC_ENABLE
-			gd_nk_free((void*)mem);
-			//free(mem);
+			gd_nk_aligned_free((void *)mem);
+#else
+			_aligned_free(mem);
+#endif
+#else
+#ifdef NK_ALLOC_ENABLE
+			gd_nk_free((void *)mem);
 #else
 			free(mem);
+#endif
 #endif
 			return nullptr;
 		} else {
 			*s = p_bytes;
 
+#ifdef ALIGN_ENABLE
+#ifdef NK_ALLOC_ENABLE
+			mem = (uint8_t*)gd_nk_aligned_realloc((void *)mem, p_bytes + PAD_ALIGN, ALIGN_SIZE);
+#else
+			mem = (uint8_t *)_aligned_realloc((void *)mem, p_bytes + PAD_ALIGN, ALIGN_SIZE);
+#endif // NK_ALLOC_ENABLE
+
+#else
 //Nask 2023/10/20
 #ifdef NK_ALLOC_ENABLE
-			mem = (uint8_t *)gd_nk_realloc((void*)mem, p_bytes + PAD_ALIGN);
-			//mem = (uint8_t *)realloc(mem, p_bytes + PAD_ALIGN);
+			mem = (uint8_t *)gd_nk_realloc((void *)mem, p_bytes + PAD_ALIGN);
 #else
 			mem = (uint8_t *)realloc(mem, p_bytes + PAD_ALIGN);
+#endif // NK_ALLOC_ENABLE
 #endif
+
 			ERR_FAIL_COND_V(!mem, nullptr);
 
 			s = (uint64_t *)mem;
@@ -161,12 +184,20 @@ void *Memory::realloc_static(void *p_memory, size_t p_bytes, bool p_pad_align) {
 		}
 	} else {
 
+#ifdef ALIGN_ENABLE
+#ifdef NK_ALLOC_ENABLE
+		mem = (uint8_t *)gd_nk_aligned_realloc((void *)mem, p_bytes, ALIGN_SIZE);
+#else
+		mem = (uint8_t *)_aligned_realloc((void *)mem, p_bytes, ALIGN_SIZE);
+#endif // NK_ALLOC_ENABLE
+
+#else
 //Nask 2023/10/20
 #ifdef NK_ALLOC_ENABLE
-		mem = (uint8_t*)gd_nk_realloc((void*)mem, p_bytes);
-		//mem = (uint8_t *)realloc(mem, p_bytes);
+		mem = (uint8_t *)gd_nk_realloc((void *)mem, p_bytes);
 #else
 		mem = (uint8_t *)realloc(mem, p_bytes);
+#endif // NK_ALLOC_ENABLE
 #endif
 		ERR_FAIL_COND_V(mem == nullptr && p_bytes > 0, nullptr);
 
@@ -195,20 +226,37 @@ void Memory::free_static(void *p_ptr, bool p_pad_align) {
 		mem_usage.sub(*s);
 #endif
 
+
+#ifdef ALIGN_ENABLE
+#ifdef NK_ALLOC_ENABLE
+		gd_nk_aligned_free((void *)mem);
+#else
+		_aligned_free(mem);
+#endif
+#else
 //Nask 2023/10/20
 #ifdef NK_ALLOC_ENABLE
 		gd_nk_free((void*)mem);
-		//free(mem);
 #else
 		free(mem);
 #endif
+#endif
+
+
+
 	} else {
-		//Nask 2023/10/20
+#ifdef ALIGN_ENABLE
+#ifdef NK_ALLOC_ENABLE
+		gd_nk_aligned_free((void *)mem);
+#else
+		_aligned_free(mem);
+#endif
+#else
 #ifdef NK_ALLOC_ENABLE
 		gd_nk_free((void *)mem);
-		//free(mem);
 #else
 		free(mem);
+#endif
 #endif
 	}
 }
