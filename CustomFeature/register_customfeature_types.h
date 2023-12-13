@@ -1,7 +1,5 @@
-﻿#include "global_plugin_settings.h"
+﻿
 #include "core/object/class_db.h"
-
-
 
 
 void register_customfeature_types();

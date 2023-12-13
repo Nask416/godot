@@ -11828,6 +11828,9 @@
     <ClInclude Include="thirdparty\zstd\zstd_errors.h">
       <Filter>Header Files\thirdparty\zstd</Filter>
     </ClInclude>
+    <ClInclude Include="CustomFeature\gds_atomic.h">
+      <Filter>Header Files\CustomFeature</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\config\engine.cpp">
@@ -17133,6 +17136,9 @@
     </ClCompile>
     <ClCompile Include="thirdparty\zstd\decompress\zstd_decompress_block.c">
       <Filter>Source Files\thirdparty\zstd\decompress</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomFeature\gds_atomic.cpp">
+      <Filter>Source Files\CustomFeature</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

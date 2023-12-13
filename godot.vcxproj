@@ -653,6 +653,7 @@
     <ClInclude Include="core\typedefs.h" />
     <ClInclude Include="core\version.h" />
     <ClInclude Include="core\version_generated.gen.h" />
+    <ClInclude Include="CustomFeature\gds_atomic.h" />
     <ClInclude Include="CustomFeature\global_plugin_settings.h" />
     <ClInclude Include="CustomFeature\register_customfeature_types.h" />
     <ClInclude Include="drivers\alsa\asound-so_wrap.h" />
@@ -3861,6 +3862,7 @@
     <ClCompile Include="core\core_string_names.cpp" />
     <ClCompile Include="core\doc_data.cpp" />
     <ClCompile Include="core\register_core_types.cpp" />
+    <ClCompile Include="CustomFeature\gds_atomic.cpp" />
     <ClCompile Include="CustomFeature\global_plugin_settings.cpp" />
     <ClCompile Include="CustomFeature\register_customfeature_types.cpp" />
     <ClCompile Include="drivers\alsa\audio_driver_alsa.cpp" />
