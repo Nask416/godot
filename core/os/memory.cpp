@@ -38,7 +38,8 @@
 
 //NasK 2023/11/14
 #ifdef NK_ALLOC_ENABLE
-#include <godot_nkalloc.h>
+#define NK_GODOT
+#include <nkAllocator\nkGodotAllocator.hpp>
 #endif
 
 

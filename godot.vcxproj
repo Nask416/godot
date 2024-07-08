@@ -411,38 +411,38 @@
     <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='template_release_openGL[mono]|x64'">/std:c++17 /nologo /MT /Gd /GR /utf-8 /bigobj /Zi /FS /Od /EHsc /W3 /w34458 /wd4100 /wd4127 /wd4201 /wd4244 /wd4245 /wd4267 /wd4305 /wd4514 /wd4714 /wd4820  /TP  /Zc:__cplusplus</AdditionalOptions>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='editor_debug_vulkan[mono]|x64'">
-    <IncludePath>V:\NaskLib\include</IncludePath>
-    <LibraryPath>V:\NaskLib\lib\godot_debug;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(nask_lib)\include</IncludePath>
+    <LibraryPath>$(nask_lib)\lib\godot_debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='editor_release_vulkan[mono]|x64'">
-    <IncludePath>V:\NaskLib\include</IncludePath>
-    <LibraryPath>V:\NaskLib\lib\godot_release;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(nask_lib)\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(nask_lib)\lib\godot_release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='editor_debug_openGL[mono]|x64'">
-    <IncludePath>V:\NaskLib\include</IncludePath>
-    <LibraryPath>V:\NaskLib\lib\godot_debug;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(nask_lib)\include</IncludePath>
+    <LibraryPath>$(nask_lib)\lib\godot_debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='editor_release_openGL[mono]|x64'">
-    <IncludePath>V:\NaskLib\include</IncludePath>
-    <LibraryPath>V:\NaskLib\lib\godot_release;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(nask_lib)\include</IncludePath>
+    <LibraryPath>$(nask_lib)\lib\godot_release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='editor_debug_default[mono]|x64'">
-    <IncludePath>V:\NaskLib\include</IncludePath>
+    <IncludePath>$(nask_lib)\include</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <NMakeCleanCommandLine>echo Starting SCons &amp;&amp; cmd /V /C set "plat=$(PlatformTarget)" ^&amp; (if "$(PlatformTarget)"=="x64" (set "plat=x86_amd64")) ^&amp; call "$(VCInstallDir)Auxiliary\Build\vcvars64.bat" !plat! ^&amp; scons --clean --directory="$(ProjectDir.TrimEnd('\'))" platform=windows target=editor_debug progress=no dev_build=yes module_mono_enabled=yes CustomFeatureEnable=false nkAllocatorEnable=false  vulkan=true opengl3=false use_volk=true extra_suffix=""</NMakeCleanCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='template_debug_openGL[mono]|x64'">
-    <IncludePath>V:\NaskLib\include</IncludePath>
+    <IncludePath>$(nask_lib)\include</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='template_debug_vulkan[mono]|x64'">
-    <IncludePath>V:\NaskLib\include</IncludePath>
+    <IncludePath>$(nask_lib)\include</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='template_release_openGL[mono]|x64'">
-    <IncludePath>V:\NaskLib\include</IncludePath>
-    <LibraryPath>V:\NaskLib\lib\godot_release;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(nask_lib)\include</IncludePath>
+    <LibraryPath>$(nask_lib)\lib\godot_release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='template_release_vulkan[mono]|x64'">
-    <IncludePath>V:\NaskLib\include</IncludePath>
+    <IncludePath>$(nask_lib)\include</IncludePath>
     <NMakeReBuildCommandLine>echo Starting SCons &amp;&amp; cmd /V /C set "plat=$(PlatformTarget)" ^&amp; (if "$(PlatformTarget)"=="x64" (set "plat=x86_amd64")) ^&amp; call "C$(VCInstallDir)Auxiliary\Build\vcvars64.bat" !plat! ^&amp; scons vsproj=yes --directory="$(ProjectDir.TrimEnd('\'))" platform=windows target=template_release progress=no debug_enebled=false dev_build=false module_mono_enabled=yes CustomFeatureEnable=true nkAllocatorEnable=true vulkan=true opengl3=false use_volk=true extra_suffix=vulkan</NMakeReBuildCommandLine>
   </PropertyGroup>
   <ItemGroup>

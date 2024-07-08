@@ -30,7 +30,8 @@
 
 #ifdef NK_ALLOC_ENABLE
 //#define NK_DEBUG
-#include <godot_nkalloc.h>
+#define NK_GODOT
+#include <nkAllocator\nkGodotAllocator.hpp>
 MAIN_THREAD_BIND
 
 #endif
